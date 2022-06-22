@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400" style="border: 1px solid black;"></canvas>
+</body>
+<script>
+    class Apple {
+        constructor(radius = 10, color = 'red') {
+            this._x = 0;
+            this._y = 0;
+            this._radius = radius;
+            this._color = color;
+            let canvas = document.getElementById('canvas');
+            this.randomSpawn(canvas);
+        }
+        get x() {
+            return this._x;
+        }
+        get y() {
+            return this._y;
+        }
+        get radius() {
+            return this._radius;
+        }
+        get color() {
+            return this._color;
+        }
+        set x(x) {
+            this._x = x;
+        }
+        set y(y) {
+            this._y = y;
+        }
+        set raidus(r) {
+            this._radius = r;
+        }
+        set color(color) {
+            this._color = color;
+        }
+
+        randomSpawn(canvas) {
+            const xMax = canvas.width - this.radius;
+            const xMin = this.radius;
+            const yMax = canvas.height - this.radius;
+            const yMin = this.radius;
+            this.x = Math.floor((Math.random() * xMax) + xMin);
+            this.y = Math.floor((Math.random() * yMax) + yMin);
+        }
+
+        update(canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.beginPath();
+            ctx.fillStyle = this.color;
+            ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+            ctx.fill();
+        }
+    };
+    class Snake {
+        constructor(x, y, bodyLength = 3, color = 'green') {
+            this._x = x;
+            this._y = y;
+            this._bodyLength = bodyLength;
+            this._xSpeed = 0;
+            this._ySpeed = 0;
+            this._speed = 15;
+            this._size = this.speed - 1;
+            this._color = color;
+            this._canvas = document.getElementById('canvas');
+            this._moveDirection = 'up';
+            this._body = [];
+        }
+        get x() {
+            return this._x;
+        }
+        get y() {
+            return this._y;
+        }
+        get size() {
+            return this._size;
+        }
+        get bodyLength() {
+            return this._bodyLength;
+        }
+        get body() {
+            return this._body;
+        }
+        get xSpeed() {
+            return this._xSpeed;
+        }
+        get ySpeed() {
+            return this._ySpeed;
+        }
+        get speed() {
+            return this._speed;
+        }
+        get color() {
+            return this._color;
+        }
+        get canvas() {
+            return this._canvas;
+        }
+        get moveDirection() {
+            return this._moveDirection;
+        }
+        set x(x) {
+            this._x = x;
+        }
+        set y(y) {
+            this._y = y;
+        }
+        set size(size) {
+            this._size = size;
+            this.speed = size + 1;
+        }
+        set bodyLength(bodyLength) {
+            this._bodyLength = bodyLength;
+        }
+        set body(body) {
+            this._body = body;
+        }
+        set xSpeed(speed) {
+            this._xSpeed = speed;
+        }
+        set ySpeed(speed) {
+            this._ySpeed = speed;
+        }
+        set speed(speed) {
+            this._speed = speed;
+            this.size = speed - 1;
+        }
+        set color(color) {
+            this._color = color;
+        }
+        set canvas(canvas) {
+            this._canvas = canvas;
+        }
+        set moveDirection(direct) {
+            this._moveDirection = direct;
+        }
+
+        canEatApple = (apple) => {
+            const HEAD_LEFT = this.x;
+            const HEAD_RIGHT = this.x + this.size;
+            const HEAD_TOP = this.y;
+            const HEAD_BOTTOM = this.y + this.size;
+
+            const closestPoint = {x: apple.x, y: apple.y};
+
+            if(apple.x < HEAD_LEFT) closestPoint.x = HEAD_LEFT;
+            else if(apple.x > HEAD_RIGHT) closestPoint.x = HEAD_RIGHT;
+
+            if(apple.y < HEAD_TOP) closestPoint.y = HEAD_TOP;
+            else if(apple.y > HEAD_BOTTOM) closestPoint.y = HEAD_BOTTOM;
+            
+            let distance = {x: apple.x - closestPoint.x, y: apple.y - closestPoint.y};
+
+            if(distance.x * distance.x + distance.y * distance.y <= apple.radius * apple.radius) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        moveLeft = () => {
+            if(this.x <= 0) this.x = this.canvas.width;
+            this.xSpeed = -this.speed;
+            this.ySpeed = 0;
+        };
+        moveRight = () => {
+            if(this.x + this.size >= this.canvas.width) this.x = 0;
+            this.xSpeed = this.speed;
+            this.ySpeed = 0;
+        };
+        moveUp = () => {
+            if(this.y <= 0) this.y = this.canvas.height;
+            this.xSpeed = 0;
+            this.ySpeed = -this.speed;
+        };
+        moveDown = () => {
+            if(this.y + this.size >= this.canvas.height) this.y = 0;
+            this.xSpeed = 0;
+            this.ySpeed = this.speed;
+        };
+
+        direction = (event) => {
+            switch(event.keyCode) {
+                case 37:    // Left
+                    this.moveDirection = this.moveDirection == 'right' ? 'right' : 'left';
+                    break;
+                case 38:    // Up
+                    this.moveDirection = this.moveDirection == 'down' ? 'down' : 'up';
+                    break;
+                case 39:    // Right
+                    this.moveDirection = this.moveDirection == 'left' ? 'left' : 'right';
+                    break;
+                case 40:    // Down
+                    this.moveDirection = this.moveDirection == 'up' ? 'up' : 'down';
+                    break;
+            }
+        };
+
+        move = () => {
+            switch (this.moveDirection) {
+                case 'left':
+                    this.moveLeft();
+                    break;
+                case 'up':
+                    this.moveUp();
+                    break;
+                case 'right':
+                    this.moveRight();
+                    break;
+                case 'down':
+                    this.moveDown();
+                    break;
+            }
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+        };
+
+        update = () => {
+            const ctx = this.canvas.getContext('2d');
+            this.move();
+            ctx.fillStyle = this.color;
+            for(let i = 0; i < this.body.length; i++) {
+                ctx.fillRect(this.body[i].x, this.body[i].y, this.size, this.size);
+                if(this.body[i].x == this.x && this.body[i].y == this.y) {
+                    return false;
+                }
+            }
+            this.body.push({x: this.x, y: this.y});
+            while(this.body.length > this.bodyLength){
+                this.body.shift();
+            }
+            return true;
+        };
+    };
+    class GameArea {
+        constructor() {
+            this._canvas = document.getElementById('canvas');
+            this._snake = new Snake((this.canvas.width / 2), (this.canvas.height / 2));
+            this._apple = new Apple();
+            this._interval = undefined;
+            this._ctx = this.canvas.getContext('2d');
+            document.addEventListener('keyup', this.snake.direction);
+        }
+        get snake() {
+            return this._snake;
+        }
+        get apple() {
+            return this._apple;
+        }
+        get interval() {
+            return this._interval;
+        }
+        get canvas() {
+            return this._canvas;
+        }
+        get ctx() {
+            return this._ctx;
+        }
+        set snake(s) {
+            this._snake = s;
+        }
+        set apple(a) {
+            this._apple = a;
+        }
+        set interval(interval) {
+            this._interval = interval;
+        }
+
+        clearGameScreen = () => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        };
+
+        updateGame = () => {
+            this.clearGameScreen();
+            if(!this.snake.update()) {
+                this.gameOver();
+            }
+            if(this.snake.canEatApple(this.apple)) {
+                this.snake.bodyLength++;
+                this.apple.randomSpawn(this.canvas);    
+            }
+            this.apple.update(this.canvas);
+        };
+
+        startGame = () => {
+            this.interval = setInterval(this.updateGame, (1000 / this.snake.speed));   // 66 Frame per sec
+        };
+
+        gameOver = () => {
+            clearInterval(this.interval);
+        }
+    };
+
+    const snakeGame = new GameArea();
+    snakeGame.startGame();
+</script>
+</html>

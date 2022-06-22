@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            font-size: 50px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="game" width="800" height="600" style="border: 3px solid #000000"></canvas>
+    <button id="toggle-button" onclick="toggleRun()">On/Off</button>
+</body>
+<script>
+    let canvas = document.getElementById("game");
+    let xCoor = 0;
+    let yCoor = 0;
+    let rectWidth = 250;
+    let rectHeight = 200;
+    let direction = "right";
+    let TOP = 0;
+    let BOTTOM = canvas.height;
+    let LEFT = 0;
+    let RIGHT = canvas.width;
+    let movingSpeed = 10;
+    let toggle = true;
+    let run;
+
+    // Vẽ hình chữ nhật
+    function drawRect(){
+        let ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.fillRect(xCoor, yCoor, rectWidth, rectHeight);
+    }
+    // Di chuyển lên trên
+    function moveUp(){
+        canvas.getContext("2d").clearRect(xCoor, yCoor, rectWidth, rectHeight);
+        if(yCoor > 0) yCoor -= movingSpeed;
+        else if(yCoor == 0) direction = "down";
+        drawRect();
+    }
+
+    // Di chuyển xuống dưới
+    function moveDown(){
+        canvas.getContext("2d").clearRect(xCoor, yCoor, rectWidth, rectHeight);
+        if(yCoor < canvas.height - rectHeight) yCoor += movingSpeed;        
+        else if(yCoor == canvas.height - rectHeight) direction = "up";
+        drawRect();
+    }
+
+    // Di chuyển sang trái
+    function moveLeft(){
+        canvas.getContext("2d").clearRect(xCoor, yCoor, rectWidth, rectHeight);
+        if(xCoor > LEFT) xCoor -= movingSpeed;        
+        else if(xCoor == LEFT) direction = "right";
+        drawRect();
+    }
+
+    // Di chuyển sang phải
+    function moveRight(){
+        canvas.getContext("2d").clearRect(xCoor, yCoor, rectWidth, rectHeight);
+        if(xCoor < canvas.width - rectWidth) xCoor += movingSpeed;        
+        else if(xCoor + rectWidth == canvas.width) direction = "left";
+        drawRect();
+    }
+
+    // Gán phím để di chuyển hình chũ nhật
+    function control(key){
+        switch (key.keyCode) {
+            case 37:
+                direction = "left";
+                moveLeft();
+                break;
+            case 38:
+            direction = "up";
+                moveUp();
+                break;
+            case 39:
+                direction = "right";
+                moveRight();
+                break;
+            case 40:
+                direction = "down";
+                moveDown();
+                break;
+        }
+    }
+    document.addEventListener("keyup", control);
+
+    // Di chuyển hcn
+    function moveRect(){
+        switch (direction) {
+            case "up":
+                moveUp();
+                break;
+            case "right":
+                moveRight();
+                break;
+            case "down":
+                moveDown();
+                break;
+            case "left":
+                moveLeft();
+                break;
+        }
+    }
+
+    function toggleRun(){      
+        if(toggle){
+            run = setInterval(moveRect, 10);
+        }else{
+            clearInterval(run);
+            run = null;
+        }
+        toggle = !toggle;
+    }
+</script>
+</html>

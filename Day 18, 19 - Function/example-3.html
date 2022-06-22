@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let arr1 = [3, 5, 1, 8, -3, 7, 8];
+    let arr2 = [7, 12, 6, 9, 20, 56, 89];
+    let arr3 = [];
+
+    function findMinInArr(arr) {
+        return arr.length > 0 ? arr.reduce((previous, current) => {
+            return current < previous ? current : previous;
+        }) : "Mảng không có phần tử nào.";
+    }
+
+    console.log(findMinInArr(arr1));
+    console.log(findMinInArr(arr2));
+    console.log(findMinInArr(arr3));
+</script>
+</html>

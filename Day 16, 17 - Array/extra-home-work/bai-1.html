@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            word-break: break-all;
+            white-space: normal;
+        }
+    </style>
+</head>
+<body>
+    <h2>Cho trước mảng gồm n phần tử, viết hàm đếm in ra số lượng phần tử số chẵn trong mảng</h2>
+    <label for="num">Nhập vào số phần tử của mảng: <input type="text" id="num"></label>
+    <p><button id="run" onclick="handleClick()">Chạy chương trình</button></p><br>
+    <div id="display-array"></div><br><br>
+    <div id="display-result"></div>
+</body>
+<script>
+    let myArr = [];
+    const initializeArray = (num) => {
+        myArr = [];
+        for(let i = 0; i < num; i++) {
+            myArr.push(Math.floor(Math.random() * 100 + 1));
+        }
+        document.getElementById("display-array").innerHTML = `Mảng ${num} phần tử: [${myArr}]`;
+    };
+
+    const countAndDisplay = (arr) => {
+        let display = document.getElementById("display-result");
+        
+        let result = [];
+        let temp = [...arr];
+        for(let el of temp) {
+            if(el % 2 == 0) result.push(temp.splice(temp.indexOf(el), 1));
+        }
+        display.innerHTML = `Có ${result.length} số chẵn có trong mảng: `;
+        for(let el of result) {
+            if(result.indexOf(el) != result.length - 1) {
+                display.innerHTML += `${result.indexOf(el) + 1}: ${el}, `;
+            } else {
+                display.innerHTML += `${result.indexOf(el) + 1}: ${el}`;
+            }
+        }
+    };
+
+    const isEven = (number) => num % 2 == 0;
+    
+    const handleClick = (e) => {
+        initializeArray(+document.getElementById("num").value);
+        countAndDisplay(myArr);
+    };
+</script>
+</html>

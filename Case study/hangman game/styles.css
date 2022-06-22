@@ -1,0 +1,146 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --button-size: 60px;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    font-size: 40px;
+}
+
+.container {
+    padding: 10px 15px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container > .alphabet-btn-container {
+    margin: 0 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 20%;
+}
+
+@media screen and (max-width: 1100px) {
+    .container > .alphabet-btn-container {
+        width: 100%;
+    }
+}
+
+.container > .alphabet-btn-container > .char-button {
+    margin: 0 5px;
+    font-size: 30px;
+    font-weight: 500;
+    padding: 10px;
+    height: var(--button-size);
+    width: var(--button-size);
+    cursor: pointer;
+}
+
+.container > .display-container {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container > .display-container > #categories-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#categories {
+    list-style-type: none;
+    position: relative;
+    border: 1px solid lightblue;
+}
+
+#categories > li {
+    padding: 2px 5px;
+    background-color: lightblue;
+    display: none;
+    width: 250px;
+    text-align: center;
+}
+
+#categories > li.selected {
+    display: inline-block;
+}
+
+#categories:hover > li {
+    cursor: pointer;
+    display: block;
+}
+
+#categories:hover > li:hover {
+    background-color: white;
+}
+#canvas {
+    border: 2px dotted black;
+}
+
+.display-container > .word-container > ul {
+    list-style-type: none;
+}
+.display-container > .word-container > ul > li {
+    display: inline-block;
+    margin: 0 2px;
+}
+
+#game-button {
+    margin-top: 10px;
+}
+
+#game-button > button,
+.gameOverMessage > button {
+    font-size: 30px;
+    padding: 10px 10px;
+    width: 150px;
+    border-radius: 0;
+    margin-top: 20px;
+}
+
+.gameOverMessage {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: black;
+    opacity: .9;
+    color: white;
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+#game-button > button:hover,
+.gameOverMessage > button:hover {
+    background-color: black;
+    color:white;
+}
+
+.show {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#message {
+    text-align: center;
+}

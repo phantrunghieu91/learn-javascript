@@ -1,0 +1,81 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --clock-size: 75px;
+    --box-height: 242px;
+}
+
+.main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: lightskyblue;
+    font-family: "Gill Sans", sans-serif;
+}
+
+.image {
+    width: 50%;
+    height: var(--box-height);
+}
+
+.image > img {
+    width: 100%;
+    height: var(--box-height);
+}
+
+.decription {
+    width: 50%;
+    height: var(--box-height);    
+}
+
+.content {
+    text-align: justify;
+    padding: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.content > h3,
+.content > h5,
+.content > p {
+    margin-top: 10px;
+}
+
+.countdown-clock {
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.countdown-clock > #days,
+.countdown-clock > #hours,
+.countdown-clock > #minutes,
+.countdown-clock > #seconds {
+    width: var(--clock-size);
+    height: var(--clock-size);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(203, 94%, 27%);
+    color: white;
+}
+
+.countdown-clock > #days > #day-number,
+.countdown-clock > #hours > #hour-number,
+.countdown-clock > #minutes > #minute-number,
+.countdown-clock > #seconds > #second-number {
+    font-size: 24px;
+}

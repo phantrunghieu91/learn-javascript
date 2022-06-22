@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="container" id="container">
+        <section class="product-form" id="product-form">
+            <table>
+                <caption><h3 id="form-cap">Add new product</h3></caption>
+                <tr>
+                    <td class="label-td"><label for="product-name">Name: </label></td>
+                    <td>
+                        <div class="input-container">
+                            <input type="text" id="product-name" placeholder="Product name">
+                            <span>Required</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-td"><label for="product-brand">Brand: </label></td>
+                    <td>
+                        <div class="input-container">
+                            <input type="text" id="product-brand" placeholder="Product brand">
+                            <span>Required</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-td"><label for="product-price">Price: </label></td>
+                    <td>
+                        <div class="input-container">
+                            <input type="text" id="product-price" placeholder="Product price">
+                            <span>Required</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-td"><label for="product-description">Description: </label></td>
+                    <td>
+                        <div class="input-container">
+                            <textarea type="text" id="product-description" placeholder="Product description"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="button-cell">
+                        <button id="form-btn">Add</button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <section class="display-products" id="display-products">
+            <table>
+                <caption><h3>Display All Products</h3></caption>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">STT</th>
+                        <th style="width: 60%">Product</th>
+                        <th style="text-align: right; color: red; width: 35%;"><span id="products-count"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="products-display" class="products-display">
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+<script src="scripts/product.js"></script>
+<script src="scripts/app-control.js"></script>
+<script src="scripts/main.js"></script>
+</html>

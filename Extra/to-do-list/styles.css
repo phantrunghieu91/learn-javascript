@@ -1,0 +1,130 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    font-size: 65%;
+}
+
+body, input, button {
+    font-size: 4rem;
+    font-family: 'Parisienne', cursive;
+}
+
+.container {
+    color: white;
+    /* background-color: hsl(245, 65%, 50%); */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.container > header {
+    width: 100%;
+    height: 20rem;
+    background-color: hsl(245, 65%, 35%);
+    padding: 1rem 2rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+.container > .search-bar {
+    width: 100%;
+    height: 15rem;
+    background-color: hsl(257, 100%, 20%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0rem 3rem;
+}
+
+.container > .search-bar > label {
+    margin-left: 2rem;
+}
+
+.container > main {
+    background-color: hsl(257, 100%, 15%);
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.container > main > .remain-todo-annouce {
+    width: 100%;
+}
+
+.container > main > .todos-container {
+    width: 80%;
+    height: auto;
+    margin-bottom: 2rem;
+    align-self: center;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.container > main > .todos-container > .list-item {
+    width: 100%;
+    height: 8rem;
+    padding: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.container > main > .todos-container > .incomplete {
+    background-color: hsl(257, 100%, 20%);
+}
+.container > main > .todos-container > .incomplete:hover {
+    background-color: hsl(257, 100%, 30%);
+}
+
+.container > main > .todos-container > .completed {
+    background-color: hsl(257, 68%, 42%);
+}
+.container > main > .todos-container > .completed:hover {
+    background-color: hsl(257, 68%, 52%);
+}
+
+.container > main > .todos-container > .list-item > button {
+    background-color: transparent;
+    border: 0;
+    color: hsl(0, 0%, 51%);
+    margin-right: 1rem;
+}
+
+.container > main > .todos-container > .list-item > button:hover {
+    color: white;
+}
+
+.container > main > .add-todo-container {
+    align-self: flex-start;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.container > main > .add-todo-container > button {
+    background-color: hsl(245, 65%, 35%);
+    color: white;
+    padding: 0 2rem;
+    cursor: pointer;
+}
+
+.container > main > .add-todo-container > button:hover {
+    background-color: hsl(245, 65%, 25%);
+}
+
+.container input[type='text'] {
+    padding: 0 1rem;
+}

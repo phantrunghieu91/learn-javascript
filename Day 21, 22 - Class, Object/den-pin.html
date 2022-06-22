@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Battery {
+        constructor(){
+            this.energy = 0;
+        }
+
+        getEnergy(){
+            return this.energy;
+        }
+
+        setEnergy(energy){
+            this.energy = energy;
+        }
+
+        decreaseEnergy(){
+            if(this.energy > 0) {
+                this.energy--;
+            }
+        }
+    };
+
+    class FlashLamp {
+        constructor(){
+            this.battery = null;
+        }
+
+        getBatteryInfo(){
+            return this.battery.getEnergy();
+        }
+        setBattery(battery) {
+            this.battery = battery;
+        }
+
+        light(){
+            return this.status ? "Đang sáng" : "Không sáng";
+        }
+
+        turnOn(){
+            this.status = true;
+            this.battery.decreaseEnergy();
+        }
+
+        turnOff(){
+            this.status = false;
+        }
+    };
+
+    let pin = new Battery();
+    pin.setEnergy(20);
+
+    let den = new FlashLamp();
+    den.setBattery(pin);
+
+    document.write(`Bật đèn: `);
+    den.turnOn();
+    document.write(`${den.light()}<br>`);
+    document.write(`Thông tin pin: ${den.getBatteryInfo()}<br><br>`);
+
+    document.write(`Tắt đèn: `);
+    den.turnOff();
+    document.write(`${den.light()}<br>`);
+    document.write(`Thông tin pin: ${den.getBatteryInfo()}`);
+</script>
+</html>

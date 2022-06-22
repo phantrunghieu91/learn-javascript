@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content"></div>
+</body>
+<script>
+    let content = document.getElementById("content");
+    let playBtn = document.createElement("button");
+    let display = document.createElement("span");
+    let guessTurn = document.createElement("h2");
+    display.setAttribute("id","display");
+    playBtn.innerText = "Chơi";
+    playBtn.setAttribute("onclick", "play()");
+    content.appendChild(guessTurn);
+    content.appendChild(document.createElement("br"));
+    content.appendChild(playBtn);
+    content.appendChild(document.createElement("br"));
+    content.appendChild(display);
+
+    function play() {
+        let isPlaying = true;
+        do {
+            let maxNumberOfRange = prompt("Nhập vào 1 số (Là số lớn nhất của khoảng số cần đoán):");;
+            // Math.random return a float number between 0 and less than 1
+            // Math.floor return the largest integer less than or equal the number inside ()
+            let randomNumber = Math.floor((Math.random() * maxNumberOfRange) + 1);
+            console.log(randomNumber);
+            let userChoiceNumber;
+            let loopTime = 1;
+            do {
+                guessTurn.innerText ="Đoán lần " + loopTime;
+                userChoiceNumber = prompt(`Nhập vào số bạn đoán (1 - ${maxNumberOfRange}):`);
+                if(userChoiceNumber > randomNumber) display.innerText = `Tiếc quá! Số bạn vừa đoán (${userChoiceNumber}) lớn hơn số cần đoán`;
+                else if (userChoiceNumber < randomNumber) display.innerText = `Tiếc quá! Số bạn vừa đoán (${userChoiceNumber}) nhỏ hơn số cần đoán`;
+                loopTime++;
+            } while (userChoiceNumber != randomNumber && loopTime <= 3);
+            if(userChoiceNumber == randomNumber) display.innerText = "Chúc mừng bạn đoán đúng rồi!";
+            else display.innerText = "Xin lỗi! Bạn đã hết lượt đoán. Số cần đoán là: " + randomNumber;            
+            if(!confirm("Bạn muốn chơi lại không ?")) isPlaying = false; 
+            guessTurn.innerText = "";
+            display.innerText = "";
+        } while (isPlaying);
+    }
+</script>
+</html>

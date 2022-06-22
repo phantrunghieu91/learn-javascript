@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Từ đối xứng</title>
+</head>
+<body>
+    <h1>Kiểm tra từ đối xứng (Palindrome)</h1>
+    <input type="text" id="input-str">
+    <button onclick="display()">Kiểm tra</button>
+    <h2 id="display"></h2>
+</body>
+<script>    
+    function isPalindrome(str) {
+        console.log(`Chuỗi hiện tại: ${str}`);
+        if(str.length == 0 || str.length == 1) return true;
+        else {
+            console.log(`So sánh: ${str.charAt(0)} - ${str.charAt(str.length-1)}`);
+            if(str.charAt(0) == str.charAt(str.length-1)) {
+                str = str.substring(1, str.length-1);   // Lấy khoảng giữa của chuỗi (trừ kí tự đầu và kí tự cuối)
+                return isPalindrome(str);                  
+            } else {
+                return false;
+            }
+        }
+    }
+    function display(){
+        let display = document.getElementById("display");
+        let str = document.getElementById("input-str").value;
+        display.innerText = isPalindrome(str) ? `"${str}" là từ đối xứng!` : `"${str}" không phải là từ đối xứng!`;
+    }
+</script>
+</html>

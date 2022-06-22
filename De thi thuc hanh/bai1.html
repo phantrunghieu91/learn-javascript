@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Hàm tìm điểm thi cao thứ 3 trong danh sách các điểm thi ở trong 1 mảng cho trước</p>
+</body>
+<script>
+    function randomNumberBetween(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function createANewRandomArr(arrLength) {
+        let arr = [];
+        for(let i = 0; i < arrLength; i++) {
+            let point = randomNumberBetween(0, 10);
+            arr.push(+point);
+        }
+        return arr;
+    }
+
+    let pointArr = createANewRandomArr(10);
+
+    function arrayWithNoRepeatValue(arr) {
+        let newArr = [];
+        for(let i = 0; i < arr.length; i++) {
+            if(!newArr.includes(arr[i])) newArr.push(arr[i]);
+        }
+        return newArr;
+    }
+
+    function timDiemCaoThuBa(arr) {
+        let copiedArr = arrayWithNoRepeatValue(arr);
+        console.log("Array without repreat value:");
+        console.log(copiedArr);
+        for(let i = 0; i < copiedArr.length; i++) {
+            let max = copiedArr[i];
+            for(let j = i + 1; j < copiedArr.length; j++) {
+                if(copiedArr[j] > max) max = copiedArr[j];
+                if(j == copiedArr.length - 1) {
+                    copiedArr[copiedArr.indexOf(max)] = copiedArr[i];
+                    copiedArr[i] = max;
+                }
+            }
+        }
+        console.log("Sorted Array:");
+        console.log(copiedArr);
+        return `result: ${copiedArr[2]}`;
+    }
+
+    console.log("Unsorted Array");
+    console.log(pointArr);
+    console.log(timDiemCaoThuBa(pointArr));
+</script>
+</html>

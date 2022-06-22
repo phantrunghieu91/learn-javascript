@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let userName = prompt("Bạn là ai?");
+    let isUsernameAdmin = userName == "Admin";
+    let isUsernameNull = userName == null;
+    if(isUsernameAdmin) {
+        let password = prompt("Vui lòng nhập mật khẩu:");
+        let isPasswordCorrect = password == "TheMaster";
+        let isPasswordNull = password == null;
+        if(isPasswordCorrect) 
+            alert("Chào Admin!");
+        else if(isPasswordNull) 
+            alert("Tạm biệt!");
+        else
+            alert("Mật khẩu bạn nhập không chính xác!");
+    } else if(isUsernameNull) 
+        alert("Tạm biệt!");
+    else 
+        alert("Tôi không biết bạn!");
+</script>
+</html>

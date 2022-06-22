@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="button-box">
+        <button onclick="alertMessage()">Bài 1</button>
+        <button onclick="bai2()">Bài 2</button>
+        <button onclick="bai4()">Bài 4</button>
+    </div>
+</body>
+<script>
+    function alertMessage(){
+        alert("Xin chào!");
+    }
+
+    function increaseOne(num){
+        return ++num;
+    }
+
+    function bai2(){
+        let output = increaseOne(+prompt("Nhập vào 1 số: "));
+        alert("Số vừa nhập tăng 1 đơn vị: " + output);
+    }
+
+    const addNumbers = () => {
+        firstNum = 4;
+        secondNum = 8;
+        result = firstNum + secondNum;
+        return result;
+    };
+
+    function bai4(){
+        let result = 0;
+        alert(`Trước: ${result}`);
+        result = addNumbers();
+        alert(`Sau: ${result}`);
+    }
+</script>
+</html>

@@ -1,0 +1,77 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.main,
+.main > .slider-container,
+.main > .buttons-container,
+.main > .slider-container > .slide {
+    display: flex;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0, 0%, 95%);
+}
+
+.main > .slider-container {
+    width: 50%;
+    height: 60%;
+    border: 15px solid lightgreen;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main > .slider-container > .slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s ease-in-out;
+}
+
+.main > .slider-container > .slide > img {
+    width: 100%;
+    height: 100%;
+}
+
+.main > .slider-container > .slide > h1 {
+    position: absolute;
+    color: hsl(0, 0%, 100%);
+    font-size: 100px;
+}
+
+.main > .buttons-container {
+    margin-top: 25px;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.main > .buttons-container > button {
+    font-size: 25px;
+    width: 150px;
+    padding: 10px 0;
+    margin: 5px;    
+    background-color: lightblue;
+    border: 0px;
+    color: hsl(12, 83%, 53%);
+}
+
+.main > .buttons-container > button:hover {
+    background-color: hsl(195, 68%, 39%);
+    color: white;
+}

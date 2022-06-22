@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra số nguyên tố</title>
+    <style>
+        *, ::before, ::after {
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            flex-flow: column wrap;
+        }
+        h3 {
+            width: 100%;
+        }
+        p {
+            word-break: break-all;
+            white-space: normal;
+        }
+        button {
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <h1>Các số nguyên tố từ 0 cho đến số bạn nhập vào</h1>
+    <label for="input-number">Nhập vào 1 số nguyên: <input type="text" id="input-number"></label>
+    <button onclick="searchPrimes(parseInt(document.getElementById('input-number').value))">Tìm</button>
+    <h3>Dãy số nguyên tố: <p id="display-primes"></p></h3>
+</body>
+<script>
+    function isPrime(num) {
+        let result = true;
+        if(num < 2) result = false;
+        if(num >= 2) {
+            for(let i = 2; i < num-1; i++) {
+                if(num % i == 0) {
+                    result = false;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    function searchPrimes(num) {
+        document.getElementById("display-primes").innerText = "";
+        let primesArr = []
+        for(let i = 0; i <= num; i++) {
+            if(isPrime(i)) primesArr.push(i); 
+        }
+        primesArr.forEach((item, index) => {
+            if(index == primesArr.length - 1) document.getElementById("display-primes").innerText += item + ".";
+            else document.getElementById("display-primes").innerText += item + ",";
+        });
+    }
+</script>
+</html>

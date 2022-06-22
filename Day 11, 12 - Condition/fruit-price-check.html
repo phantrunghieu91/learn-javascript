@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+        div {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>GÍA HOA QUẢ</h1>
+        <p>
+            <select type="text" id="fruit-name" name="fruit-name">
+                <option value="" selected>----</option>
+                <option value="Ổi">Ổi</option>
+                <option value="Dưa Hấu">Dưa Hấu</option>
+                <option value="Táo">Táo</option>
+                <option value="Xoài">Xoài</option>
+                <option value="Cam">Cam</option>
+                <option value="Chôm Chôm">Chôm Chôm</option>
+                <option value="Măng Cụt">Măng Cụt</option>
+            </select>
+            <button onclick="checkPrice()">Xem giá</button>
+        </p>
+        <h2 id="show-price"></h2>
+    </div>
+</body>
+<script>
+    function checkPrice(){
+        let fruitName = document.getElementById("fruit-name").value;
+        let showPrice = document.getElementById("show-price");
+        switch (fruitName) {
+            case "Ổi":
+            case "Dưa Hấu":
+                showPrice.innerText = "20000 VNĐ/kg";
+                break;
+            case "Táo":
+            case "Xoài":
+                showPrice.innerText = "30000 VNĐ/kg";
+                break;
+            case "Cam":
+            case "Chôm Chôm":
+                showPrice.innerText = "40000 VNĐ/kg";
+                break;
+            case "Măng Cụt":
+                showPrice.innerText = "50000 VNĐ/kg";
+                break;
+            default:
+                showPrice.innerText = "Vui lòng chọn 1 loại trái cây";
+        }
+    }
+    </script>
+</html>

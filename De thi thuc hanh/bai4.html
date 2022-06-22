@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600" style="border: 1px solid black;"></canvas>
+</body>
+<script>
+    class Rectangle {
+        constructor(x, y, w, h, color) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.color = color;
+        }
+        render(canvas) {
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+        }
+    };
+    const canvas = document.getElementById("canvas");
+    let hcn = new Rectangle(10, 10, 200, 100, "#000000");
+    hcn.render(canvas);
+</script>
+</html>

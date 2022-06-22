@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+    tr, td {
+        border: 1px solid;
+    }
+    td {
+        text-align: center;
+        padding: 10px;
+        font-size: 40px;
+    }
+</style>
+<body>
+    <div id="main">
+
+    </div>
+</body>
+<script>
+    let mainBody = document.getElementById("main");
+    let table = document.createElement("table");
+    mainBody.appendChild(table);
+    for(let i = 1; i <= 10; i ++) {
+        let row = document.createElement("tr");        
+        table.appendChild(row);
+        for(let j = 1; j <= 10; j++) {
+            let cell = document.createElement("td");
+            cell.innerText = i * j;
+            row.appendChild(cell);
+        }
+    }
+</script>
+</html>

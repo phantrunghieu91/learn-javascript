@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Tìm giá trị lớn nhất trong mảng
+    // Tạo 1 bảng gồm 20 số nguyên ngẫu nhiên trong khoảng 0 - 100
+    let sampleArray = [];
+    for(let i = 0; i < 25; i++) {
+        let newItem = Math.floor(Math.random() * 101);
+        sampleArray.push(newItem);
+    }
+    
+    // Cách khác để copy mảng dùng slice() 
+    // let cloneArr = sampleArray.slice(1,25);
+    // Copy 1 sampleArray ra 1 mảng cloneArr dùng toán tử lan tràn? (spread operator)
+    let cloneArr = [...sampleArray];
+
+    // Sắp xếp mảng từ nhỏ tới lớn dùng sort()
+    cloneArr.sort((a,b) => a-b);
+    let max = cloneArr[cloneArr.length-1];
+    
+    // In mảng
+    let table = document.createElement("table");
+    document.body.appendChild(table);
+    for(let i = 0; i < 25; i+=5){
+        let row = document.createElement("tr");
+        for(let j = 0; j < 5; j++){
+            let cell = document.createElement("td");
+            let curIndex = i+j;
+            // Ô có giá trị lớn nhất thành màu đỏ, ô khác xanh
+            sampleArray[curIndex] == max ? cell.style.color = "red" : cell.style.color = "blue";
+            cell.innerText = `${sampleArray[curIndex]}`;
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+    let result = document.createElement("h2");
+    result.innerText = "Giá trị lớn nhất trong mảng là " + max;
+    document.body.appendChild(result);
+</script>
+</html>

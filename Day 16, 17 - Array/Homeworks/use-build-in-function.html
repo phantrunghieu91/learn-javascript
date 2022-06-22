@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="bai-1"></div>
+    <div id="bai-2"></div>
+    <div id="bai-3"></div>
+</body>
+<script>
+    // Bài 1: Viết một chương trình Javascript để nối tất cả các phần tử trong một mảng chuỗi lại với nhau.
+    let myColor = ["Red", "Yellow", "Blue", "Black", "White"];
+    let bai1Result = document.createElement("h1");
+    bai1Result.innerText = myColor.join(", ");
+    document.getElementById("bai-1").appendChild(bai1Result);
+
+    // Bài 2: Viết một chương trình nhận một số nhập vào và chèn dấu (-) giữa 2 số chẵn.
+    let randomNumber = Math.floor(Math.random() * 100000000);
+    let numArr = randomNumber.toString().split("");
+    for(let i = 0, j = i + 1; i < numArr.length, j < numArr.length ; i++, j++) {
+        if(parseInt(numArr[i]) % 2 == 0){
+            if(parseInt(numArr[j]) % 2 == 0){ 
+                let removed = numArr.splice(j, 0, "-");
+            }
+        }
+    }
+    let bai2Result = document.createElement("h1");
+    bai2Result.innerText = numArr.join("");
+    document.getElementById("bai-2").appendChild(bai2Result);
+    
+    // Bài 3: Viết một chương trình nhập vào một chuỗi và chuyển các ký tự chữ thường trong chuỗi vừa nhập sang thành dạng chữ hoa.
+    let testStr = "The Fast and Furious Movies";
+    let words = testStr.split(" ");
+    let charsArr = words.map(chars => chars.split(""));
+    let bai3Result = document.createElement("h1");
+    for(let i = 0; i < charsArr.length; i++) {
+        for(let j = 0; j <charsArr[i].length; j++){
+            if(isNaN(charsArr[i][j])){
+                if(charsArr[i][j] == charsArr[i][j].toLowerCase()) charsArr[i][j] = charsArr[i][j].toUpperCase();
+                else charsArr[i][j] = charsArr[i][j].toLowerCase();
+            }
+        }
+        charsArr[i] = charsArr[i].join("");
+    }
+    bai3Result.innerHTML = charsArr.join(" ");
+    document.getElementById("bai-3").appendChild(bai3Result);
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="result"></div>
+    <canvas id="display" width="800" height="600" style="border: 1px solid black;"></canvas>
+</body>
+<script>
+    class Rectangle {
+        constructor(width, height){
+            this.width = width;
+            this.height = height;
+        }
+
+        getWidth(){
+            return this.width;
+        }
+        getHeight(){
+            return this.height;
+        }
+
+        setWidth(width){
+            this.width = width;
+        }
+        setHeight(){
+            this.height = height;
+        }
+        getArea(){
+            return this.height * this.width;
+        }
+        getPerimeter(){
+            return 2 * (this.width + this.height);
+        }
+        drawRect(canvas){
+            let ctx = canvas.getContext("2d");
+            ctx.beginPath();
+            ctx.fillRect(canvas.width/3, canvas.height/3, this.width, this.height);
+        }
+    };
+
+    let sampleRect = new Rectangle(200, 300);
+    sampleRect.drawRect(document.getElementById("display"));
+    let result = document.getElementById("result");
+    result.innerHTML = `Hình chữ nhật có chiều dài: ${sampleRect.getWidth()}, chiều rộng: ${sampleRect.getHeight()}, diện tích: ${sampleRect.getArea()}, chu vi: ${sampleRect.getPerimeter()}`;
+</script>
+</html>

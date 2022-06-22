@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Tạo 1 mảng gồm 100 số nguyên ngẫu nhiên, nhập vào 1 số để kiểm tra số đó có tồn tại trong mảng hay không</h2>
+    <label for="search">Nhập vào số bạn muốn tìm:<input type="text" id="search"></label><br>
+    <button onclick="searchThruArray(+(document.getElementById('search').value))">Tìm kiếm</button>
+    <table id="array-display"></table>
+    <p id="result"></p>
+</body>
+<script>
+    // Tạo 1 mảng gồm 100 số nguyên ngẫu nhiên
+    let sampleArray = [];
+    for(let i = 0; i < 100; i++) {
+        let newItem = Math.floor(Math.random() * 101);
+        sampleArray.push(newItem);
+    }
+
+    
+
+    function searchThruArray(searchValue) {     
+        document.getElementById("result").innerText = "";
+        let result = [];
+        for(let i = 0; i < sampleArray.length; i++) {
+            if(sampleArray[i] == searchValue) result.push(i);
+        }
+        result.length == 0 ? document.getElementById("result").innerText = "Xin lỗi, mảng ko có số bạn muốn tìm!" : result.forEach(e => document.getElementById("result").innerHTML += `Vị trí của số cần tìm: ${e} <br>`);
+        // Hiển thị mảng 100 số nguyên để check tay
+        // item => {} <=> function(item){}
+        let table = document.getElementById("array-display");
+        table.innerHTML = "";
+        for(let i = 0; i < 100; i+=10){
+            let row = document.createElement("tr");
+            for(let j = 0; j < 10; j++){
+                let cell = document.createElement("td");
+                let curIndex = i+j;
+                // đổi màu ô có giá trị bằng searchValue là đỏ, ko bằng là xanh
+                result.indexOf(curIndex) != -1 ? cell.style.color = "red" : cell.style.color = "blue";
+                cell.innerText = `${sampleArray[curIndex]}`;
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+        }  
+    }
+</script>
+</html>

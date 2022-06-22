@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Hình chữ nhật</title>
+    <style>
+        #main {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+        #main > button {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <button onclick="toggleOnOff()">On/Off</button>
+        <br><canvas id="display" width="800px" height="600px"></canvas>
+    </div>
+</body>
+<script>
+    class Rectangle {
+        constructor(x, y, width, height, direction, color = "black", speed = 20) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.direction = direction;
+            this.height = height;
+            this.color = color;
+            this.speed = speed;
+        }
+        getX(){
+            return this.x;
+        }
+        getY(){
+            return this.y;
+        }
+        getWidth(){
+            return this.width;
+        }
+        getHeight(){
+            return this.height;
+        }
+        getColor(){
+            return this.color;
+        }
+        getSpeed(){
+            return this.speed;
+        }
+        getDirection(){
+            return this.direction;
+        }
+        setX(x){
+            this.x = x;
+        }
+        setY(y){
+            this.y = y;
+        }
+        setWidth(width){
+            this.width = width;
+        }
+        setHeight(height){
+            this.height = height;
+        }
+        setColor(color){
+            this.color = color;
+        }
+        setSpeed(speed){
+            this.speed = speed;
+        }
+        move = () => {
+            switch(this.direction){
+                case "vertical":
+                    this.y += this.speed;
+                    break;
+                case "horizontal":
+                    this.x += this.speed;
+                    break;
+            }
+        };
+    };
+    const canvas = document.getElementById("display");
+    canvas.style.border = "1px solid black";
+    let ctx = canvas.getContext("2d");
+    let rectOne = new Rectangle(50, 250, 100, 50, "horizontal", "red");
+    let rectTwo = new Rectangle(400, 100, 150, 100, "vertical", "blue");
+    let run;
+    let toggle = true;
+
+    drawRect(rectOne);
+    drawRect(rectTwo);
+
+    function drawRect(rect) {
+        ctx.fillStyle = rect.color;
+        ctx.fillRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+    }
+
+    function clear() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function movingRect(rect) {
+        let isTouchTop = rect.getY() < 0;
+        let isTouchBottom = rect.getY() + rect.getHeight() > canvas.height;
+        let isTouchLeft = rect.getX() < 0;
+        let isTouchRight = rect.getX() + rect.getWidth() > canvas.width;
+        if(isTouchBottom || isTouchTop || isTouchLeft || isTouchRight) rect.setSpeed(-rect.getSpeed());
+        rect.move();
+        drawRect(rect);
+    }
+
+    function isCollision(...rects){
+        let distanceX = (rects[0].x + (rects[0].width/2)) - (rects[1].x + (rects[1].width)/2);
+        let distanceY = (rects[0].y + (rects[0].height/2)) - (rects[1].y + (rects[1].height)/2);
+        if(distanceX < 0) 
+            distanceX = - distanceX;
+        let distanceWidth = (rects[0].width + rects[1].width) / 2;
+        if(distanceY < 0) 
+            distanceY = -distanceY;
+        let distanceHeight = (rects[0].height + rects[1].height) / 2;
+
+        if(distanceX <= distanceWidth && distanceY <= distanceHeight){
+            rects[0].speed = -rects[0].speed;
+            rects[1].speed = -rects[1].speed;
+            // console.log(`${distanceX}, ${distanceWidth}`);
+            // console.log(`${distanceY}, ${distanceHeight}`);
+        }
+    }
+
+    function isCollided(rect1, rect2){
+        if(rect1.x + rect1.width >= rect2.x &&              // Điểm bên phải hcn1 chạm/vượt qua điểm bên trái của hcn2
+        rect1.x <= rect2.x + rect2.width &&                 // Điểm bên trái hcn1 chạm/vượt qua Điểm bên phải của hcn2
+        rect1.y + rect1.height >= rect2.y &&                // Điểm dưới hcn1 chạm/vươt qua điểm trên hcn2
+        rect1.y <= rect2.y + rect2.height)                  // Điểm trên hcn1 chạm/vượt qua điểm dưới hcn2
+        {
+            // console.log(`x1 + w1=${rect1.x + rect1.width} >= x2=${rect2.x}`);
+            // console.log(`x1=${rect1.x} <= x2 + w2=${rect2.x + rect2.width}`);
+            // console.log(`y1 + h1=${rect1.y + rect1.height} >= y2=${rect2.y}`);
+            // console.log(`y1=${rect1.y} <= y2 + h2=${rect2.y + rect2.height}`);
+            rect1.speed = -rect1.speed;
+            rect2.speed = -rect2.speed;
+            return true;
+        }
+        else return false;
+    }
+    
+    function toggleOnOff(){
+        if(toggle){
+            run = setInterval(() => {
+                clear();
+                movingRect(rectOne);
+                movingRect(rectTwo);     
+                // isCollision(rectOne, rectTwo);     
+                isCollided(rectOne, rectTwo);
+            }, 1000/20);;
+        }else{
+            clearInterval(run);
+            run = null;
+        }
+        toggle = !toggle;
+    }
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function randomNumberBetween(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function createANewRandomArr(arrLength) {
+        let arr = [];
+        for(let i = 0; i < arrLength; i++) {
+            let point = randomNumberBetween(0, 10);
+            arr.push(+point);
+        }
+        return arr;
+    }
+
+    function tryRemoveFromArray(arr, index) {
+        if(index >= 0 && index < arr.length) {
+            for(let i = index; i < arr.length - 1; i++) {
+                arr[i] = arr[i + 1];
+            }
+            arr.length -= 1;
+        } 
+        return arr;
+    }
+
+    let array = createANewRandomArr(10);
+
+    console.log(array);
+    let inputIndex = +prompt("Index = ");
+    console.log(tryRemoveFromArray(array, inputIndex));
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        #container {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 50vh;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container > h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 class="title">Cho trước 1 mảng n phần tử, viết hàm đếm số phần tử trong mảng có giá trị bằng a</h1>
+        <div id="display-array"></div>
+        <p><label for="search-number">Nhập vào số cần tìm: </label></p>
+        <p><input type="text" id="search-number"></p>
+        <p><button onclick="findDupplicate(+document.getElementById('search-number').value)">Tìm</button></p>
+        <div id="display-result"></div>
+    </div>
+</body>
+<script>
+    let displayArr = document.getElementById("display-array");
+    let displayResult = document.getElementById("display-result");
+
+    const initializeArray = () => {
+        let myArr = [];
+        for(let i = 0; i < 30; i++) {
+            myArr.push(Math.floor(Math.random() * 100 + 1));
+        }
+        return myArr;
+    }
+    
+    const displayArray = (arr) => {
+        displayArr.innerHTML = "Mảng cho trước: ";
+        for(let i = 0; i < arr.length; i++) {
+            if(i == 0) {
+                displayArr.innerHTML += `[${arr[i]}, `;
+            } else if(i == arr.length - 1){
+                displayArr.innerHTML += `${arr[i]}] `;
+            } else {
+                displayArr.innerHTML += `${arr[i]}, `;
+            }
+            console.log(i);
+        }
+    };
+
+    const findDupplicate = (num) => {
+        let result = baseArr.filter(el => el == num);
+        displayResult.innerHTML = result.length == 0 ? `Không có phần tử nào có giá trị bằng ${num}.` : `Có ${result.length} phần tử có giá trị bằng ${num}.`;
+    };
+
+    const baseArr = initializeArray();
+    displayArray(baseArr);
+</script>
+</html>

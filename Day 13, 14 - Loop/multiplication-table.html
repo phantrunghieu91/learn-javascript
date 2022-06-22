@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        tr, td {
+            border: 1px solid;
+        }
+        td {
+            padding: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <table id="multiplication-table"></table>
+</body>
+<script>
+    let table = document.getElementById("multiplication-table");
+
+    for(let num2 = 1; num2 <= 9; num2 ++) {
+        let row = document.createElement("tr");
+        for(let num1 = 2; num1 <= 9; num1 ++) {
+            let cell = document.createElement("td");
+            cell.innerText = `${num1} x ${num2} = ${num1 * num2}`;
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+</script>
+</html>

@@ -1,0 +1,137 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    font-size: 65%;
+}
+
+body, button, input, textarea{
+    font-size: 2.5rem;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+input, textarea {
+    padding: .5rem;
+}
+
+button {
+    background-color: hsl(120, 42%, 51%);
+    border: 0.1rem solid white;
+    padding: 1rem 1.5rem;
+    color: hsl(0, 0%, 100%);
+    width: 15rem;
+    height: 6rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: hsl(120, 42%, 41%);
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.container > .product-form {
+    background-color: hsla(0, 0%, 86%, 0.945);
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+}
+
+.container > .product-form table td {
+    padding: 1rem;
+}
+
+.container > .product-form > table > tbody > tr > .label-td {
+    text-align: right;
+}
+
+.container > .product-form > table > tbody > tr > .button-cell {
+    text-align: center;
+}
+
+.container > .product-form .input-container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.container > .product-form .input-container > span {
+    font-size: 1.5rem;
+    color: red;
+    font-style: italic;
+    opacity: .8;
+    visibility: hidden;
+}
+
+.container > .display-products {
+    padding: .5rem 0rem;
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container > .display-products > table {
+    text-align: center;
+    width: 80%;
+}
+
+.container > .display-products > table .product:nth-child(odd) {
+    background-color: hsla(184, 100%, 89%, 0.945);
+}
+
+.container > .display-products > table .product:hover {
+    background-color: antiquewhite;
+}
+
+.container > .display-products > table .product td {
+    padding: 1rem 0;
+}
+
+.container > .display-products > table .product .detail-proc {
+    position: relative;
+}
+
+.container > .display-products > table .product .detail-proc:hover {
+    cursor: pointer;
+    background-color: hsl(150, 8%, 85%);
+}
+
+#detail-container {
+    position: absolute;
+    z-index: 1;
+    top: calc(100% - 1rem);
+    width: 100%;
+    background-color: hsl(150, 8%, 95%);
+}
+
+#detail-container > td > table {
+    width: 100%;
+    text-align: center;
+}
+
+#detail-container > td > table > td {
+    width: 50%;
+}
+
+#detail-container > td > table > tr:nth-child(even) {
+    background-color: white;
+}

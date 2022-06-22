@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="answer">Tên chính thức của Javascript là gì?</label>
+    <input type="text" id="answer"><br>
+    <button onclick="checkAnswer()">Submit</button>
+</body>
+<script>
+    function checkAnswer(){
+        let answer = document.getElementById("answer").value;
+        answer == "ECMAScript" ? alert("Đúng rồi!") : alert("Không biết á ? Là ECMAScript!");
+    }
+</script>
+</html>

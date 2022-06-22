@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Pig Latin is the same words in the same order expect that you take the first letter of each word and put it on the end, then you add 'ay' to the end of that.
+    const sample = "nevermind youve got them";
+    function pigLatin(str){
+        let strArr = str.split(" ");
+        let result = [];
+        result = strArr.map(word => {
+            let temp = word.slice(0,1);
+            word = word.substring(1);
+            word += temp + "ay";
+            return word;
+        });
+        return result;
+    }
+    console.log(pigLatin(sample));
+
+</script>
+</html>

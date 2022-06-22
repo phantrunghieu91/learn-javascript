@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hình tròn vs hình chữ nhật</title>
+</head>
+<style>
+    #main {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+        #main > button {
+            font-size: 30px;
+        }
+
+        #display {
+            border: 1px black solid;
+        }
+</style>
+<body>
+    <div id="main">
+        <button onclick="toggleOnOff()">On/Off</button>
+        <canvas id="display" width="1024" height="728"></canvas>
+    </div>
+</body>
+<script>
+    class Circle {
+        constructor(x, y, r, speed, direction, color = "black"){
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.speed = speed;
+            this.direction = direction;
+            this.color = color;
+        }
+        move = () => {
+            switch(this.direction){
+                case "vertical":
+                    this.y += this.speed;
+                    break;
+                case "horizontal":
+                    this.x += this.speed;
+                    break;
+            }
+        };
+        draw = (ctx) => {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, true);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.fillStyle = "black";
+            ctx.fillRect(this.x, this.y, 4, 4);
+            ctx.fillText(`(${this.x}, ${this.y})`, this.x - this.r / 2, this.y);
+        };
+        clear = (ctx) => {
+            ctx.clearRect(this.x, this.y, 1, 1);
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r + 1, 0, 2 * Math.PI, true);
+            ctx.fillStyle = "white";
+            ctx.fill();
+        };
+        moving = (ctx) => {
+            this.clear(ctx);
+            let isTouchTop = this.y - this.r < 0;
+            let isTouchBottom = this.y + this.r > canvas.height;
+            let isTouchLeft = this.x - this.r < 0;
+            let isTouchRight = this.x + this.r > canvas.width;
+            if(isTouchTop || isTouchBottom || isTouchLeft || isTouchRight){
+                this.speed = -this.speed;
+            }
+            this.move();
+            this.draw(ctx);
+        };
+    };
+
+    class Rectangle {
+        constructor(x, y, w, h, speed, direction, color = "black") {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.speed = speed;
+            this.direction = direction;
+            this.color = color;
+        };
+        move = () => {
+            switch(this.direction){
+                case "vertical":
+                    this.y += this.speed;
+                    break;
+                case "horizontal":
+                    this.x += this.speed;
+                    break;
+            }
+        };
+        draw = (ctx) => {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+        };
+        clear = (ctx) => {
+            ctx.clearRect(this.x, this.y, this.w, this.h);
+        };
+        moving = (ctx) => {
+            this.clear(ctx);
+            let isTouchTop = this.y < 0;
+            let isTouchBottom = this.y + this.h > canvas.height;
+            let isTouchLeft = this.x - this.w < 0;
+            let isTouchRight = this.x + this.w > canvas.width;
+            if(isTouchTop || isTouchBottom || isTouchLeft || isTouchRight){
+                this.speed = -this.speed;
+            }
+            this.move();
+            this.draw(ctx);
+        }
+    };
+
+    const canvas = document.getElementById("display");
+    let ctx = canvas.getContext("2d");
+    let toggle = true;
+    let run;
+    let ht = new Circle(100, 100, 50, 30, "horizontal", "green");
+    let hcn = new Rectangle(600, 200, 200, 150, 50, "vertical", "orange");
+
+    isCollided = (circle, rect) => {
+        let closestPoint = {x: circle.x, y: circle.y};
+        if(closestPoint.x < rect.x) closestPoint.x = rect.x;
+        else if(closestPoint.x > rect.x + rect.w) closestPoint.x = rect.x + rect.w;
+        if(closestPoint.y < rect.y) closestPoint.y = rect.y;
+        else if(closestPoint.y > rect.y + rect.h) closestPoint.y = rect.y + rect.h;
+        let distance = {x: circle.x - closestPoint.x, y: circle.y - closestPoint.y};
+        if(Math.pow(distance.x, 2) + Math.pow(distance.y, 2) <= Math.pow(circle.r, 2)){
+            console.log(`Điểm gần nhất giữa tâm hình tròn và hcn: x= ${closestPoint.x}, y= ${closestPoint.y}`);
+            circle.speed = -circle.speed;
+            rect.speed = -rect.speed;
+        }
+    };
+
+    ht.draw(ctx);
+    hcn.draw(ctx);
+
+    function toggleOnOff(){
+        if(toggle){
+            run = setInterval(() => {
+                ht.moving(ctx);
+                hcn.moving(ctx);
+                isCollided(ht, hcn);
+            }, 100);;
+        }else{
+            clearInterval(run);
+            run = null;
+        }
+        toggle = !toggle;
+    }
+</script>
+</html>

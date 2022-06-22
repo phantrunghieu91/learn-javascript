@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="display"></h2>
+    <button onclick="bai1()">Bài 1</button>
+    <button onclick="bai2()">Bài 2</button>
+    <button onclick="bai4()">Bài 4</button>
+    <button onclick="bai5()">Bài 5</button>
+    <br>
+    <select id="caseList">
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option value="d">d</option>
+        <option value="e">e</option>
+    </select>
+    <label for="number-1">a= <input type="text" id="number-1" size="5"></label>
+    <label for="number-2">b=<input type="text" id="number-2" size="5"></label>
+    <label for="number-3">c=<input type="text" id="number-3" size="5"></label>
+</body>
+<script>
+    let display = document.getElementById("display");
+    // bài 1
+    function bai1(){
+        alert("Tôi là Phan Trung Hiếu!");
+        display.innerText = "Hello";
+    }
+    
+    // bài 2
+    function bai2(){
+        let numberToPow = prompt("Nhập vào 1 số: ");
+        display.innerText = (`Bình phương của ${numberToPow} là ${numberToPow**2}`); 
+    }
+    
+    // bài 3
+    // B1: lấy giá trị của 2 số từ 2 input với document.getElementById() và gán cho a và b
+    // B2: Hiển thị ra màn hình bằng document.write("<h1>S = " + a * b + "</h1>"
+
+    // Bài 4
+    function bai4(){
+        let caseList = document.getElementById("caseList");
+        let inputOne = +document.getElementById("number-1").value;
+        let inputTwo = +document.getElementById("number-2").value;
+        let inputThree = +document.getElementById("number-3").value;
+        switch (caseList.value) {
+            case "a":
+                display.innerText = `Hình vuông với độ dài cạnh là ${inputOne} có chu vi bằng: ${4*inputOne}, diện tích bằng: ${inputOne**2}`;
+                break;
+            case "b":
+                display.innerText = `${inputOne}^2 = ${inputOne**2} và ${inputOne}^${inputTwo} = ${inputOne**inputTwo}`;
+                break;
+            case "c":
+                let sum = 0;
+                if(inputOne >= inputTwo) {
+                    for(let i = inputTwo; i <= inputOne; i++){
+                        sum += i;
+                    }
+                    display.innerText = `Tổng của các số trong khoảng ${inputTwo} đến ${inputOne} bằng: ${sum}`;
+                } else {
+                    for(let i = inputOne; i <= inputTwo; i++) {
+                        sum += i;
+                    }
+                    display.innerText = `Tổng của các số trong khoảng ${inputOne} đến ${inputTwo} bằng: ${sum}`;
+                }
+                break;
+            case "d":
+                display.innerText = `Năm ${inputOne} thuộc thế kỷ ${parseInt(inputOne / 100) + 1}`;
+                break;
+            case "e":
+                let isSideOneValid = inputTwo + inputThree <= inputOne;
+                let isSideTwoValid = inputOne + inputThree <= inputTwo;
+                let isSideThreeValid = inputOne + inputTwo <= inputThree;
+                if (isSideOneValid || isSideTwoValid || isSideThreeValid) {
+                    display.innerText = `3 cạnh vừa nhập không phải 3 cạnh tam giác.`;
+                } else if ((inputOne == inputTwo && inputOne != inputThree) || (inputOne == inputThree && inputOne != inputTwo) || (inputTwo == inputThree && inputTwo != inputOne)){
+                    display.innerText = `3 cạnh vừa nhập là 3 cạnh tam giác cân.`;    
+                } else if (inputOne == inputTwo && inputOne == inputThree) {
+                    display.innerText = `3 cạnh vừa nhập là 3 cạnh tam giác đều.`;
+                } else if (inputOne**2 + inputTwo**2 == inputThree**2 || inputOne**2 + inputThree**2 == inputTwo**2 || inputTwo**2 + inputThree**2 == inputOne**2) {
+                    display.innerText = `3 cạnh vừa nhập là 3 cạnh tam giác vuông`;
+                } else {
+                    display.innerText = `3 cạnh vừa nhập là 3 cạnh tam giác.`;
+                }
+                break;
+        }
+    }
+
+    // Bài 5
+    function bai5(){
+        let inputOne = +document.getElementById("number-1").value;
+        let inputTwo = +document.getElementById("number-2").value;
+        let inputThree = +document.getElementById("number-3").value;
+        if (inputOne == 0) {
+            if(inputTwo == 0) {
+                if (inputThree == 0) {
+                    display.innerText = "Phương trình có vô số nghiệm";
+                } else {
+                    display.innerText = `Phương trình vô nghiệm`;
+                }
+            } else {
+                display.innerText = `Phương trình có nghiệm x = c/b = ${inputThree/inputTwo}`;
+            }
+        } else {
+            let delta = inputTwo**2 - 4*inputOne*inputThree;
+            if(delta > 0) {
+                display.innerText = `Phương trình có 2 nghiệm: x1 = (-b + sqrt(d))/(2*a) = ${(-inputTwo + (Math.sqrt(delta).toFixed(2))/(2*inputOne))}; x2 = (-b - sqrt(d))/(2*a) = ${(-inputTwo - (Math.sqrt(delta).toFixed(2))/(2*inputOne))}`;
+            } else if(delta == 0) {
+                display.innerText = `Phương trình có nghiệm kép x = b/(2*a) = ${inputTwo/(2*inputOne)}`;
+            } else {
+                display.innerText = `Phương trình vô nghiệm`;
+            }
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+        }
+        h1 {
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    // First triangle
+    document.write("<h1>Vẽ tam giác vuông</h1>");
+    document.write("<h3>Tam giác 1:</h3>");
+    for(let i = 0; i < 5; i ++) {
+        for(let j = 0; j <= i; j ++) {
+            document.write("*");
+        }
+        document.write("<br>");
+    }
+
+    // second triangle
+    document.write("<h3>Tam giác 2:</h3>");
+    for(let i = 0; i < 5; i ++) {
+        for(let j = 5; j > i; j--) {
+            document.write("*");
+        }
+        document.write("<br>");
+    }
+
+    // Third triangle
+    document.write("<h3>Tam giác 3:</h3>");
+    for(let i = 5; i >= 1; i--) {
+        for(let j = 1; j <= 5; j++) {        
+            if(j < i) document.write('&ensp;');    
+            else document.write("*");
+        }
+        document.write("<br>");
+    }
+    // Fourth triangle
+    document.write("<h3>Tam giác 4:</h3>");
+    for(let i = 1; i <= 5; i++) {
+        for(let j = 1; j <= 5; j++) {        
+            if(j > i-1) document.write("*");    
+            else document.write("&ensp;");
+        }
+        document.write("<br>");
+    }
+</script>
+</html>

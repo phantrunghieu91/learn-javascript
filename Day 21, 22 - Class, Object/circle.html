@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Circle {
+        constructor(radius, color){
+            this.radius = radius;
+            this.color = color;
+        }
+
+        getRadius(){
+            return this.radius;
+        }
+
+        getArea(){
+            return (Math.pow(this.radius, 2) * Math.PI).toFixed(2);
+        }
+    }
+
+    let a = new Circle(5);
+    document.write(`Hình tròn có bán kính ${a.getRadius()}, diện tích = ${a.getArea()}`);
+    let b = new Circle(7);
+    document.write(`Hình tròn có bán kính ${b.getRadius()}, diện tích = ${b.getArea()}`);
+</script>
+</html>

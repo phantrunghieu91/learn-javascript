@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container" id="container">
+        <h1>HANGMAN</h1>
+        <h3>Use the alphabet below to guess the word, or click hint to get a clue. </h3>
+        <div class="alphabet-btn-container" id="alphabet-btn-container"></div>
+        <div class="display-container" id="display-container">
+            <div id="liveCount"></div>
+            <div id="categories-container">
+                Catologies: 
+                <ul id="categories">
+                </ul>                
+            </div>
+            <div class="word-container" id="word-container">
+                <ul id="guess-word"></ul>
+            </div>
+            <div id="clue">
+                <p>Clue: <span id="clue-message"></span></p>
+            </div>
+            <canvas id="canvas"></canvas>
+            <div class="game-button" id="game-button">
+                <button id="hint-button">Hint</button>
+            </div>
+        </div>
+        <div class="gameOverMessage" id="gameOverMessage">
+            <div id="message"></div>
+            <button id="restart-button">Restart</button>
+        </div>
+    </div>
+</body>
+</html>

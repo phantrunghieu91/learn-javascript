@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        #container {
+            margin: 0;
+            padding: 0 20px;
+            width: 100vw;
+            height: 50vh;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container > h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 class="title">Cho trước 1 mảng n phần tử, viết hàm tính tổng các số nguyên tố có trong mảng.</h1>
+        <div id="display-array"></div>        
+        <div id="display-result"></div>
+    </div>
+</body>
+<script>
+    let displayArr = document.getElementById("display-array");
+    let displayResult = document.getElementById("display-result");
+
+    const initializeArray = () => {
+        let myArr = [];
+        for(let i = 0; i < 50; i++) {
+            myArr.push(Math.floor(Math.random() * 100 + 1));
+        }
+        return myArr;
+    }
+    const baseArr = initializeArray();
+
+    const displayArray = (arr) => {
+        displayArr.innerHTML = "Mảng cho trước: ";
+        for(let i = 0; i < arr.length; i++) {
+            if(i == 0) {
+                displayArr.innerHTML += `[${arr[i]}, `;
+            } else if(i == arr.length - 1){
+                displayArr.innerHTML += `${arr[i]}] `;
+            } else {
+                displayArr.innerHTML += `${arr[i]}, `;
+            }
+        }
+    };
+
+    const isPrime = (num) => {
+        if(num == 1) {
+            return false;
+        }
+        let result = true;
+        for(let i = 2; i < num -1; i++) {
+            if(num % i == 0) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    const sumPrimesNumber = (arr) => {
+        let sum = arr.reduce((sum, curEle) => {
+            if(isPrime(curEle)) {
+                sum += curEle;
+            }
+            return sum;
+        }, 0);
+        displayResult.innerHTML = "Tổng các số nguyên tố có trong mảng: " + sum;
+    };
+
+    const displayPrimesArray = (arr) => {
+        displayArr.innerHTML += `<br>Các số nguyên tố trong mảng: `;
+        let primes = arr.filter(el => isPrime(el)).sort().forEach(el => displayArr.innerHTML += `${el}, `);
+    };
+
+    displayArray(baseArr);
+    displayPrimesArray(baseArr);
+    sumPrimesNumber(baseArr);
+</script>
+</html>

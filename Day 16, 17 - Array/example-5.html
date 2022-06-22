@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let arr = [-3, 1, 10, 20, 0, 100];
+    let display = document.createElement("h1");
+    display.innerHTML = `Trước đảo: ${arr}<br>`;
+    let first = 0, last = arr.length-1;
+    while(first < last) {
+        let temp = arr[first];
+        arr[first] = arr[last];
+        arr[last] = temp;
+        first++;
+        last--;
+    }
+    display.innerHTML += `Sau đảo: ${arr}`;
+    document.body.appendChild(display);
+</script>
+</html>

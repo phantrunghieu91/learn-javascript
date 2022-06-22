@@ -1,0 +1,18 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Canvas css */
+#game {
+    border: 2px solid;
+    background-color: bisque;
+}

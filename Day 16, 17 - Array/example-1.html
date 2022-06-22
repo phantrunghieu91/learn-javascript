@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Thêm phần tử vào mảng và hiển thị mảng</h2>
+    <input type="text" id="item">
+    <button onclick="add()">Thêm</button>
+    <button onclick="display()">Hiển thị</button>
+    <p id="display"></p>
+</body>
+<script>
+    let sampleArray = [];
+    function add(){
+        let newItem = document.getElementById("item").value;
+        sampleArray.push(newItem);
+    }
+
+    function display(){
+        let show = document.getElementById("display");
+        sampleArray.forEach((value, index) => show.innerHTML += `Phần tử thứ ${index + 1}: ${value}<br> `);
+    }
+</script>
+</html>

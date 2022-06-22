@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, input, button {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <label for="radius">Radius: <input type="text" id="radius"></label>
+    <p>
+        <button id="create-circle-btn">Tạo hình tròn</button>
+        <button id="get-circle-area">Diện tích hình tròn</button>
+        <button id="draw-circle">Vẽ hình tròn trên canvas</button>
+    </p>
+    <span id="result"></span><br>
+    <canvas id="canvas" width="500" height="300" style="border: 1px solid black;"></canvas>
+</body>
+<script>
+    class MyCircle {
+        constructor(x, y, radius) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+        }
+        getRadius = () => {
+            return this.radius;
+        };
+        setRadius = (radius) => {
+            this.radius = radius;
+        };
+        getArea = () => {
+            return (this.radius * this.radius * Math.PI).toFixed(2);
+        };
+        draw = () => {
+            let ctx = document.getElementById('canvas').getContext('2d');
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+            ctx.fill();
+        };
+    };
+
+    let circle;
+
+    function isCircleExist() {
+        return circle != undefined || circle != null;
+    }
+
+    function createNewCircle() {
+        const radiusInput = document.getElementById('radius').value;
+        if(isNaN(radiusInput) || radiusInput == '') {
+            alert('Nhập vào 1 số');
+        } else if(!isCircleExist()){
+            circle = new MyCircle(250, 150, radiusInput);    
+            document.getElementById('result').innerText = `Hình tròn có bán kính ${radiusInput} được tạo!`;
+        } else {
+            circle.setRadius(radiusInput);
+            document.getElementById('result').innerText = `Bán kính hình tròn bây giờ là ${circle.getRadius()}!`;
+        }
+    }
+
+    function getCircleArea() {
+        const display = document.getElementById('result');
+        if(isCircleExist()){
+            display.innerText = `Diện tích hình tròn ${circle.getArea()}`;
+        } else {
+            alert("Tạo hình tròn trước!");
+        }
+    }
+
+    function drawCircle() {
+        if(isCircleExist()) {
+            circle.draw();
+        }else {
+            alert("Tạo hình tròn trước!");
+        }
+    }
+
+    document.getElementById('create-circle-btn').addEventListener('click', createNewCircle);
+    document.getElementById('get-circle-area').addEventListener('click', getCircleArea);
+    document.getElementById('draw-circle').addEventListener('click', drawCircle);
+
+    main();
+</script>
+</html>

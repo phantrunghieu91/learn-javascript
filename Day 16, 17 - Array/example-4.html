@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Tạo 1 mảng gồm 100 số nguyên ngẫu nhiên
+    let sampleArray = [];
+    for(let i = 0; i < 100; i++) {
+        let newItem = Math.floor(Math.random() * 101);
+        sampleArray.push(newItem);
+    }
+
+    // Hàm tìm số nhỏ nhất trong mảng
+    function findMin() {
+        let min = sampleArray[0];
+        for(let i = 1; i < sampleArray.length; i++) {
+            if(sampleArray[i] < min) min = sampleArray[i];
+        }
+        return min;
+    }
+
+    // Hàm tìm số lớn nhất trong mảng
+    function findMax() {
+        let max = sampleArray[0];
+        for(let i = 1; i < sampleArray.length; i++) {
+            if(sampleArray[i] > max) max = sampleArray[i];
+        }
+        return max;
+    }
+
+    // In mảng
+    let table = document.createElement("table");
+    table.style.color = "white";
+    table.style.fontSize = "30px";
+    table.style.textAlign = "center";
+    document.body.appendChild(table);
+    for(let i = 0; i < 100; i+=10){
+        let row = document.createElement("tr");
+        for(let j = 0; j < 10; j++){
+            let cell = document.createElement("td");
+            let curIndex = i+j;
+            // Ô có giá trị lớn nhất thành màu đỏ, ô nhỏ nhất màu xanh, bt màu đen
+            sampleArray[curIndex] == findMax() ? cell.style.backgroundColor = "red" : sampleArray[curIndex] == findMin() ? cell.style.backgroundColor = "blue" : cell.style.backgroundColor = "black";
+            cell.innerText = `${sampleArray[curIndex]}`;
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+
+    let result = document.createElement("h2");
+    result.innerHTML = "Giá trị lớn nhất trong mảng là " + findMax() + "<br>" + "Giá trị nhỏ nhất trong mảng là " + findMin();
+    document.body.appendChild(result);
+</script>
+</html>

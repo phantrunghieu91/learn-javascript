@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *, *::after, *::before {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .main {
+            background-color: hsl(60, 100%, 95%);
+            height: 100vh;
+            width: 80vw;
+            font-size: 25px;
+            padding: 0px 20px;
+            overflow: auto;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            box-shadow: 10px 0px 10px 0px gray, -10px 0px 10px 0px gray;
+        }
+
+        .add-book-div, .display-div {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            padding: 20px 30px;
+        }
+
+        .add-book-div {
+            background-color: lightgray;
+        }
+
+        .add-book-div > button, 
+        .add-book-div > input {
+            margin-top: 10px;
+        }
+
+        .display-div {
+            width: 100%;
+        }
+
+        #display-books {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        #display-books tr:nth-child(2n) {
+            background-color: lightgray;
+        }
+
+        #display-books > th, td {
+            padding: 10px;
+        }
+
+        input {
+            font-size: 25px;
+        }
+
+        button {
+            background-color: lightgreen;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 25px;
+            width: 120px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="add-book-div">
+            <h2>Thêm sách vào thư viện</h2>
+            <input type="text" id="book-name">
+            <button onclick="addBook(document.getElementById('book-name').value)">Thêm</button>
+        </div>
+        <!-- Hiển thị sách -->
+        <div class="display-div">
+            <table id="display-books">
+                <caption><h2>Hiển thị sách trong thư viện</h2></caption>
+                <thead>
+                    <tr>
+                        <th>Tên sách</th>
+                        <th></th>
+                        <th id="books-count"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+</body>
+<script>
+    let booksList = ['Harry Potter và Tù nhân ngục Azkaban','Percy Jackson - Kẻ cắp tia chớp','Truyện nghìn lẻ một đêm', 'Thiên Ma', 'Tru tiên', 'Đấu phá thương khung', 'Tạp đồ'];
+
+    function addBook(bookName){
+        if(bookName != ""){
+            if(booksList.every(book => book != bookName)) {
+                booksList.push(bookName);
+                renderBooks();
+                document.getElementById('book-name').value = "";
+            }
+            else alert(`Chúng ta đã có ${bookName} trong thư viện!`);
+        } else {
+            alert("Vui lòng không để trống ô nhập!");
+        }
+    }
+
+    function removeBook(position) {
+        for (index in booksList) {
+            if(index == position){
+                if(confirm("Bạn có chắc chắn xóa sách này không ?")){
+                    booksList.splice(index, 1);
+                }
+                break;
+            }
+        };
+        renderBooks();
+    }
+
+    function editBook(position) {
+        let bookCell = document.getElementById("book-"+position);
+        let editBtn = document.getElementById("edit-btn-"+position);
+        let deleteBtn = document.getElementById("delete-btn-"+position);
+        let bookSpan = document.getElementById("book-name-"+position);
+
+        let yesBtn = document.createElement("button");
+        let noBtn = document.createElement("button");
+        let editInput = document.createElement("input");
+        yesBtn.setAttribute("onclick", `editBook(${position}, true)`);
+        noBtn.setAttribute("onclick", `editBook(${position}, false)`);
+        yesBtn.setAttribute("id", "yes");
+        noBtn.setAttribute("id", "no");
+        yesBtn.innerText = "Có";
+        noBtn.innerText = "Không";
+
+        if(arguments.length == 1){
+            editInput.setAttribute("type", "text");
+            editInput.setAttribute("id", `edit-book-name`);
+            editInput.setAttribute("value", bookCell.textContent);
+            editInput.size = bookCell.textContent.length + 5;
+            bookCell.appendChild(editInput);
+
+            editBtn.parentNode.appendChild(yesBtn);
+            deleteBtn.parentNode.appendChild(noBtn);
+            editBtn.style.display = "none";
+            deleteBtn.style.display = "none";
+            bookSpan.style.display = "none";
+        } else if(arguments[1] == true){
+            let newBookName = document.getElementById(`edit-book-name`).value;
+            if(newBookName != "") {
+                let isNewBookNameInBookList = booksList.every((book, index, arr) => {
+                    if(book != newBookName){
+                        return true;
+                    }else{
+                        return index == position;
+                    }
+                });
+                if(!isNewBookNameInBookList){
+                    alert("Trong thư viện đã có sách này!");
+                } else {
+                    booksList[position] = newBookName;
+                    bookSpan.innerText = newBookName;
+                    bookSpan.style.display = "inline-block";
+                    editBtn.style.display = "inline-block";
+                    deleteBtn.style.display = "inline-block";
+                    bookCell.removeChild(document.getElementById("edit-book-name"));
+                    editBtn.parentNode.removeChild(document.getElementById("yes"));
+                    deleteBtn.parentNode.removeChild(document.getElementById("no"));
+                }
+            } else {
+                bookSpan.style.display = "inline-block";
+                editBtn.style.display = "inline-block";
+                deleteBtn.style.display = "inline-block";
+                bookCell.removeChild(document.getElementById("edit-book-name"));
+                editBtn.parentNode.removeChild(document.getElementById("yes"));
+                deleteBtn.parentNode.removeChild(document.getElementById("no"));
+            }
+        } else if(arguments[1] == false){
+            bookSpan.style.display = "inline-block";
+            editBtn.style.display = "inline-block";
+            deleteBtn.style.display = "inline-block";
+            bookCell.removeChild(document.getElementById("edit-book-name"));
+            editBtn.parentNode.removeChild(document.getElementById("yes"));
+            deleteBtn.parentNode.removeChild(document.getElementById("no"));
+        }
+
+    }
+
+    function renderBooks(){
+        let table = document.getElementById("display-books");
+        let tbody;
+        if(table.hasChildNodes()){
+            let childen = table.childNodes;
+            childen.forEach(child => {
+                if(child.nodeName.toLowerCase() == "tbody") tbody = child;
+            });
+        }
+        tbody.innerText = "";
+        document.getElementById("books-count").innerText = `Có ${booksList.length} sách`;
+        for(let i = 0; i < booksList.length; i++){
+            let row = document.createElement("tr");
+            let bookNameCell = document.createElement("td");
+            let bookNameSpan = document.createElement("span");
+            bookNameSpan.setAttribute("id", `book-name-${i}`);
+            bookNameSpan.innerText = booksList[i];
+            bookNameCell.appendChild(bookNameSpan);
+            bookNameCell.setAttribute("id", `book-${i}`);
+            row.appendChild(bookNameCell);
+
+            let editCell = document.createElement("td");
+            let editBtn = document.createElement("button");
+            editCell.style.textAlign = "center";
+            editBtn.setAttribute("id", `edit-btn-${i}`);
+            editBtn.setAttribute("onclick",`editBook(${i})`);
+            editBtn.innerText = "Sửa";
+            editCell.appendChild(editBtn);
+            row.appendChild(editCell);
+
+            let deleteCell = document.createElement("td");
+            let deleteBtn = document.createElement("button");
+            deleteCell.style.textAlign = "center";
+            deleteBtn.setAttribute("id", `delete-btn-${i}`);
+            deleteBtn.setAttribute("onclick", `removeBook(${i})`);
+            deleteBtn.innerText = "Xóa";
+            row.appendChild(deleteCell);
+            deleteCell.appendChild(deleteBtn);
+
+            tbody.appendChild(row);
+        }
+    }
+
+    document.body.onload = renderBooks();
+</script>
+</html>

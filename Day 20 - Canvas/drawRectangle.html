@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="sample-canvas" width="800" height="800"></canvas>
+</body>
+<script>
+    let canvas = document.getElementById("sample-canvas");
+    canvas.style.backgroundColor = "gray";
+    let ctx = canvas.getContext("2d");
+
+    // Vẽ hình chữ nhật dùng fillRect()
+    ctx.fillRect(10, 25, 280, 150);
+
+    // Vẽ hình cn dùng strokeRect()
+    // Có thể dùng phương thức của đường thẳng để tạo kiểu
+    ctx.lineJoin = "bevel";
+    ctx.lineWidth = 25;
+    ctx.strokeRect(325, 25, 280, 150);
+
+    // Vẽ hình chữ nhật dùng clearRect()
+    let rectHeight = 500;
+    let rectWidth = 600;
+    for(let x = 100, y = 200; x < 340; x += 40, y+= 40){
+        ctx.fillStyle = "green";
+        ctx.fillRect(x, y, rectWidth, rectHeight);
+        ctx.clearRect(x + 20, y + 20, rectWidth - 40, rectHeight - 40);
+        rectHeight -= 80;
+        rectWidth -= 80;
+    }
+</script>
+</html>

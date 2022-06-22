@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Hình tròn</title>
+    <style>
+        #main {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+        #main > button {
+            font-size: 30px;
+        }
+
+        #display {
+            border: 1px black solid;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <button onclick="toggleOnOff()">On/Off</button>
+        <canvas id="display" width="1024" height="728"></canvas>
+    </div>
+</body>
+<script>
+    class Circle {
+        constructor(x, y, r, speed, direction, color = "black"){
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.speed = speed;
+            this.direction = direction;
+            this.color = color;
+        }
+        move = () => {
+            switch(this.direction){
+                case "vertical":
+                    this.y += this.speed;
+                    break;
+                case "horizontal":
+                    this.x += this.speed;
+                    break;
+            }
+        };
+        draw = (ctx) => {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, true);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+        clear = (ctx) => {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r + 1, 0, 2 * Math.PI, true);
+            ctx.fillStyle = "white";
+            ctx.fill();
+        }
+    };
+
+    const canvas = document.getElementById("display");
+    let ctx = canvas.getContext("2d");
+    let circle1 = new Circle(100, 100, 25, 50, "horizontal", "red");
+    let circle2 = new Circle(canvas.width / 2, canvas.height / 2, 100, 30, "vertical", "green");
+    circle1.draw(ctx);
+    circle2.draw(ctx);
+    let run;
+    let toggle = true;
+
+    function movingCircle(circle) {
+        circle.clear(ctx);
+        let isTouchTop = circle.y - circle.r < 0;
+        let isTouchBottom = circle.y + circle.r > canvas.height;
+        let isTouchLeft = circle.x - circle.r < 0;
+        let isTouchRight = circle.x + circle.r > canvas.width;
+        if(isTouchTop || isTouchBottom || isTouchLeft || isTouchRight){
+            circle.speed = -circle.speed;
+        }
+        circle.move();
+        circle.draw(ctx);
+    }
+
+    function isCollided(ht1, ht2) {
+        let distance = Math.pow((ht1.x - ht2.x), 2) + Math.pow((ht1.y - ht2.y), 2);
+        if(Math.pow((ht1.r + ht2.r), 2) >= distance){
+            ht1.speed = -ht1.speed;
+        }
+    }
+
+    function toggleOnOff(){
+        if(toggle){
+            run = setInterval(() => {
+                movingCircle(circle1);
+                movingCircle(circle2);
+                isCollided(circle1, circle2);
+            }, 100);;
+        }else{
+            clearInterval(run);
+            run = null;
+        }
+        toggle = !toggle;
+    }
+</script>
+</html>

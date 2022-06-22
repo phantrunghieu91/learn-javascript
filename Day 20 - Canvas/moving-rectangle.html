@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="game" width="800" height="600" style="border: 3px solid #000000"></canvas>
+</body>
+<script>
+    let canvas = document.getElementById("game");
+    let xCoor = 10;
+    let yCoor = 0;
+    let rectWidth = 200;
+    let rectHeight = 300;
+    let direction = "down";
+    let TOP = 0;
+    let BOTTOM = canvas.height;
+    let LEFT = 0;
+    let RIGHT = canvas.width;
+    // Pixel mỗi loop hcn di chuyển dc
+    let movingSpeed = 10;
+
+    // Vẽ hình chữ nhật
+    function drawRect(){
+        let ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.fillRect(xCoor, yCoor, rectWidth, rectHeight);
+    }
+    // Di chuyển lên trên
+    // function moveUp(){
+    //     canvas.getContext("2d").clearRect(xCoor, yCoor, rectWidth, rectHeight);
+    //     if(yCoor > 0) yCoor -= movingSpeed;
+    //     else if(yCoor == 0) direction = "down";
+    //     drawRect();
+    // }
+
+    // Di chuyển xuống dưới
+    // function moveDown(){
+    //     canvas.getContext("2d").clearRect(xCoor, yCoor, rectWidth, rectHeight);
+    //     if(yCoor < canvas.height - rectHeight) yCoor += movingSpeed;        
+    //     else if(yCoor == canvas.height - rectHeight) direction = "up";
+    //     drawRect();
+    // }
+
+    // Di chuyển hình chữ nhật khi chạm biên
+    // function movingRectInsideCanvas(){
+    //     if(direction == "down") moveDown();
+    //     else if(direction == "up") moveUp();
+    // }
+
+    // Tổng hợp tất cả di chuyển vào 1 hàm
+    function moveRect(){
+        canvas.getContext("2d").clearRect(xCoor, yCoor, rectWidth, rectHeight);
+        let isTouchTop = yCoor < TOP;
+        let isTouchBottom = yCoor + rectHeight > BOTTOM;
+        if(isTouchBottom || isTouchTop) movingSpeed = -movingSpeed;
+        yCoor += movingSpeed;
+        drawRect();
+    }
+
+    let runLoop = setInterval(moveRect, 10);
+</script>
+</html>

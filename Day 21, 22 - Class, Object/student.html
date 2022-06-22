@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Student {
+        constructor(name, age, gender, pointMath = 0, pointPhysic = 0, pointChemistry = 0){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.pointMath = pointMath;
+            this.pointPhysic = pointPhysic;
+            this.pointChemistry = pointChemistry;
+        }
+        setPointMath(point) {
+            this.pointMath = point;
+        }
+        setPointPhysic(point) {
+            this.pointPhysic = point;
+        }
+        setPointChemistry(point) {
+            this.pointChemistry = point;
+        }
+        getAveragePoint() {
+            return ((this.pointMath + this.pointPhysic + this.pointChemistry) / 3).toFixed(2);
+        }
+        getName() {
+            return this.name;
+        }
+        setName(name) {
+            this.name = name;
+        }
+    };
+
+    function main (){
+        const tu = new Student("Tú", 25, 'Male');
+        console.log(tu);
+        tu.setPointMath(7);
+        tu.setPointPhysic(6);
+        tu.setPointChemistry(8.5);
+        console.log(tu);
+        console.log(`Điểm trung bình 3 môn của ${tu.getName()}: ${tu.getAveragePoint()}`);
+        tu.setName('Nam');
+        console.log(tu);
+    }
+
+    main();
+</script>
+</html>

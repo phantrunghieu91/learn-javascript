@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Driver's License</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // You have to get a new driver's license and you show up at the office at the same time as 4 other people. The office says that they will see everyone in alphabetical order and it takes 20 minutes for them to process each new license. All of the agents are available now, and they can each see one customer at a time. How long will it take for you to walk out of the office with your new license?
+
+    // const sample = {
+    //     self: "Eric", 
+    //     "available agents": 2,
+    //     "other people": "Adam Caroline Rebecca Frank"
+    // };
+    const sample = {
+        self: "Liam", 
+        "available agents": 2,
+        "other people": "Adam Caroline Rebecca Frank Kelvin Bob Top John Kenedy"
+    };
+
+    let yourself = sample.self;
+    let queue = sample["other people"].split(" ");
+    queue.push(yourself);
+    //  localeCompare return -1 0 1 (before, equal, after)
+    let sortedQueue = queue.sort((a, b) => a.localeCompare(b));
+    // let sortedQueue = sortArray(queue);
+    console.log(sortedQueue);
+    console.log(`${yourself}, time to take your license is ${calculateTime(sortedQueue, sample["available agents"])}`);
+    function compareName(first, second) {
+        let result;
+        for(let i = 0, j = 0; i < first.length, j < second.length; i++, j++){
+            if(first.charCodeAt(i) > second.charCodeAt(j)){
+                result = false;;
+                break;
+            } else if(first.charCodeAt(i) < second.charCodeAt(j)){
+                result = true;
+                break;
+            } else {
+                continue;
+            }
+        }
+        return result;
+    }
+
+    function sortArray(arr) {
+        for(let i = 0; i < arr.length; i++){
+            for(let j = i + 1; j < arr.length;j++) {
+                if(compareName(arr[i], arr[j])) continue;
+                else {
+                    let temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+
+    function calculateTime(arr, agents){
+        let time = 0;
+        for(let i = 0 ; i < arr.length; i += agents){
+            let inProcessPeople = arr.slice(i, i + agents);
+            if(inProcessPeople.includes(yourself)){
+                time += 20;
+                return time;
+            } else {
+                time += 20;
+            }
+        }
+    }
+</script>
+</html>

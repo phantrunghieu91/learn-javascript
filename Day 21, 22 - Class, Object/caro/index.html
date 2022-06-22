@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caro</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <h1>Caro Game</h1>
+    <div class="inputPlayersName">
+        <label for="player1">Player 1: <br><input type="text" id="player1" value="Jin" size="5" disabled>
+            <button id="changePlayer1Name">Đổi tên</button>
+        </label>
+        <div class="players-marks">
+            <i>Player 1 là quân cờ X</i><br>
+            <i>Player 2 là quân cờ O</i><br>            
+        </div>
+        <label for="player2">Player 2: <br><input type="text" id="player2" value="Mii" size="5" disabled>
+            <button id="changePlayer2Name">Đổi tên</button>
+        </label>        
+    </div>
+    <div class="board" id="board">
+    </div>
+    <div class="winning-message" id="winningMessage">
+        <div data-winning-message-text></div>
+        <button id="restartBtn">Chơi lại!</button>
+    </div>
+</body>
+<script src="scripts/player.js" defer></script>
+<script src="scripts/board.js" defer> </script>
+<script src="scripts/game-control.js" defer></script>
+<script src="scripts/main.js" defer></script>
+</html>

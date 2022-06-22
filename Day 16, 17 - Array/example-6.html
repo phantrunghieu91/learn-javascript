@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Caro board</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 30px;
+        }
+        tr, td {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    let board = [];
+    let table = document.createElement("table");
+    table.style.height = "500px";
+    table.style.width = "500px";
+    document.body.appendChild(table);
+    for(let i = 0; i < 5; i++) {
+        board[i] = [];
+        for(let j = 0; j < 5; j++) {
+            board[i][j] = "o";
+        }
+    }
+
+    // Hiển thị bàn cờ
+    function drawBoard(){
+        table.innerText = "";
+        for(let i = 0; i < 5; i++) {
+            let row = document.createElement("tr");
+            for(let j = 0; j < 5; j++) {
+                let cell = document.createElement("td");
+                cell.innerText = board[i][j];
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+        }
+    }
+    drawBoard();
+
+    // Nhập tọa độ x, y từ input và nút change value
+    let xCoordinate = document.createElement("input");
+    xCoordinate.placeholder = "Tọa độ x";
+    document.body.appendChild(xCoordinate);
+    let yCoordinate = document.createElement("input");
+    yCoordinate.placeholder = "Tọa độ y";
+    document.body.appendChild(yCoordinate);
+    let changeBtn = document.createElement("button");
+    changeBtn.innerText = "Thay đổi ở tọa độ";
+    changeBtn.setAttribute("onclick", "changeValue()");
+    document.body.appendChild(changeBtn);
+    
+    // Hàm đổi o thành x
+    function changeValue(){
+        let returnValue = board[parseInt(xCoordinate.value)][parseInt(yCoordinate.value)] == "o" ? "x" : "o";
+        board[parseInt(xCoordinate.value)][parseInt(yCoordinate.value)] = returnValue;
+        drawBoard();
+    }
+</script>
+</html>

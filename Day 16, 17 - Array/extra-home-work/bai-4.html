@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        #container {
+            margin: 0;
+            padding: 0 20px;
+            width: 100vw;
+            height: 50vh;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container > h1 {
+            text-align: center;
+        }
+
+        #display-result {
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 class="title">Viết hàm tính tổng các số nguyên tố nhỏ hơn 500.</h1>
+        <div id="display-array"></div>        
+        <div id="display-result"></div>
+    </div>
+</body>
+<script>
+    let displayArr = document.getElementById("display-array");
+    let displayResult = document.getElementById("display-result");
+
+    const displayArray = (arr) => {
+        displayArr.innerHTML = "Các số nguyên tố nhỏ hơn 500: ";
+        for(let i = 0; i < arr.length; i++) {
+            if(i == 0) {
+                displayArr.innerHTML += `[${arr[i]}, `;
+            } else if(i == arr.length - 1){
+                displayArr.innerHTML += `${arr[i]}] `;
+            } else {
+                displayArr.innerHTML += `${arr[i]}, `;
+            }
+        }
+    };
+
+    const isPrime = (num) => {
+        if(num == 1) {
+            return false;
+        }
+        let result = true;
+        for(let i = 2; i < num -1; i++) {
+            if(num % i == 0) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    const initializePrimesArrayLessThan = (num = 500) => {
+        let arr = [];
+        for(i = 2; i < num; i++) {
+            if(isPrime(i)) {
+                arr.push(i);
+            }
+        }
+        return arr;
+    };
+    const baseArr = initializePrimesArrayLessThan();
+
+    const sumPrimesNumber = (arr) => {
+        let sum = arr.reduce((sum, curEle) => {
+            if(isPrime(curEle)) {
+                sum += curEle;
+            }
+            return sum;
+        }, 0);
+        displayResult.innerHTML = "Tổng các số nguyên tố nhỏ hơn 500: " + sum;
+    };
+
+    displayArray(baseArr);
+    sumPrimesNumber(baseArr);
+</script>
+</html>

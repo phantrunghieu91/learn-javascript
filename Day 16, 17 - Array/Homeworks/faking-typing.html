@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Gõ bất kỳ ký tự vào đây</h1>
+    <textarea id="text" cols="30" rows="10" onkeyup="fakeTyping()"></textarea>
+</body>
+<script>
+    // Khởi tạo 1 mảng chứa các câu có sẵn
+    let textArr = [
+        "Bạn đã xem Spy x Family chưa?",
+        "Bạn có thích Billie Eilish không?",
+        "Tạm biệtttt!",
+        "Tôi có ngầu không ?"
+    ];
+
+    // Chọn ngẫu nhiên 1 câu trong mảng các câu
+    function changeAnotherText(){
+        let randomTextPos = Math.floor(Math.random() * textArr.length);
+        let randomText = textArr[randomTextPos];
+        return randomText;
+    }
+
+    let currentText = changeAnotherText();
+    let str = "";
+    console.log(currentText);
+    function fakeTyping(){
+        let textArea = document.getElementById("text");        
+        for(let i = 0; i < textArea.value.length; i++){
+            str += currentText.charAt(i);
+            if(i == currentText.length){
+                str = "";
+                currentText = changeAnotherText();
+            }
+        }
+        textArea.value = str;
+        str = "";
+    }
+</script>
+</html>

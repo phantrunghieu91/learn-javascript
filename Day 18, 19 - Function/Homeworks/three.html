@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Luyện tập tạo hàm không tham số, có tham số, mảng với hàm.</h1>
+    <div>
+        <p>
+            <select id="exercises" onchange="changeLabel(+document.getElementById('exercises').value)">
+                <option value="0">Chọn 1 bài</option>
+                <option value="1">Bài 1</option>
+                <option value="2">Bài 2</option>
+                <option value="3">Bài 3</option>
+                <option value="4">Bài 4</option>
+                <option value="5">Bài 5</option>
+                <option value="6">Bài 6</option>
+                <option value="7">Bài 7</option>
+                <option value="8">Bài 8</option>
+                <option value="9">Bài 9</option>
+                <option value="10">Bài 10</option>
+            </select>
+        </p>
+        <h3 id="de-bai" style = "display: none; width: 500px; text-align: justify;"></h3>
+        <p><label for="input-1" style="display: none;"></label><input type="text" id="input-1" style="display: none;"></p>
+        <p><label for="input-2" style="display: none;"></label><input type="text" id="input-2" style="display: none;"></p>
+        <p><label for="input-2" style="display: none;"></label><input type="text" id="input-3" style="display: none;"></p>
+        <p>
+            <button id="process-exercise" style="display: none;" onclick="processExercise(+document.getElementById('exercises').value)">Thực hiện bài được chọn</button>
+        </p>
+    </div>
+    <h4 id="starsList" style="display: none;">Polaris, Aldebaran, Deneb, Vega, Altair, Dubhe và Regulus.</h4>
+    <h2 id = "display-result"></h2>
+</body>
+<script>
+    let displayResult = document.getElementById("display-result");
+
+    function changeLabel(exerciseNumber){
+        displayResult.innerText = "";
+
+        let deBai = document.getElementById("de-bai");
+        let starsList = document.getElementById("starsList");
+        let inputOne = document.getElementById("input-1");
+        let inputTwo = document.getElementById("input-2");
+        let inputThree = document.getElementById("input-3");
+        let labels = document.getElementsByTagName("label");
+        let processBtn = document.getElementById("process-exercise");
+
+        deBai.style.display = "none";
+        starsList.style.display = "none";
+        labels[0].style.display = "none";
+        labels[1].style.display = "none";
+        labels[2].style.display = "none";
+        inputOne.style.display = "none";
+        inputTwo.style.display = "none";
+        inputThree.style.display = "none";
+        processBtn.style.display = "none";
+        inputOne.value = "";
+        inputTwo.value = "";
+        inputThree.value = "";
+        deBai.innerText = "";
+
+        switch (exerciseNumber) {
+            case 1:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                labels[1].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                inputTwo.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Số thứ nhất: ";
+                labels[1].textContent = "Số thứ hai: ";
+                deBai.innerText = 'Nhập 2 số, hiển thị tổng nếu số thứ nhất nhỏ hơn hoặc bằng số thứ hai, số thứ nhất lớn hơn số thứ hai nếu số thứ nhất lớn hơn số thứ hai';
+                break;
+            case 2:
+                deBai.style.display = "inline-block";
+                starsList.style.display ="inline-block";
+                labels[0].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập vào tên 1 ngôi sao: ";
+                deBai.innerText = 'Hiển thị tên chòm sao tương ứng với tên ngôi sao nhập vào';
+                break;
+            case 3:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập vào 1 số: ";
+                deBai.innerText = 'Bình phương của một số nhập vào từ bàn phím'
+                break;
+            case 4:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập vào bán kính hình tròn: ";
+                deBai.innerText = 'Tính chu vi, diện tích hình tròn dựa vào bán kính được nhập'
+                break;
+            case 5:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập vào 1 số: ";
+                deBai.innerText = 'Tính giai thừa của một số được nhập vào'
+                break;
+            case 6:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập vào 1 số: ";
+                deBai.innerText = "Kiểm tra số vừa nhập có phải là số hay không"
+                break;
+            case 7:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                labels[1].style.display = "inline-block";
+                labels[2].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                inputTwo.style.display = "inline-block";
+                inputThree.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Số thứ nhất: ";
+                labels[1].textContent = "Số thứ hai: ";
+                labels[2].textContent = "Số thứ ba: ";
+                deBai.innerText = "Nhập vào 3 số, tìm số nhỏ nhất"
+                break;
+            case 8:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập 1 số: ";
+                deBai.innerText = "Kiểm tra số vừa nhập có phải số nguyên dương không";
+                break;
+            case 9:
+                deBai.style.display = "inline-block";
+                starsList.style.display ="none";
+                labels[0].style.display = "inline-block";
+                labels[1].style.display = "none";
+                labels[2].style.display = "none";
+                inputOne.style.display = "inline-block";
+                inputTwo.style.display = "none";
+                inputThree.style.display = "none";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập 1 mảng số nguyên (số, phân cách bằng dấu phẩy): ";
+                deBai.innerText = "Nhập vào 1 dãy số nguyên cách nhau bởi dấu, thực hiện đảo ngược dãy số";
+                break;
+            case 10:
+                deBai.style.display = "inline-block";
+                labels[0].style.display = "inline-block";
+                labels[1].style.display = "inline-block";
+                inputOne.style.display = "inline-block";
+                inputTwo.style.display = "inline-block";
+                processBtn.style.display = "inline-block";
+                labels[0].textContent = "Nhập 1 chuỗi: ";
+                labels[1].textContent = "Nhập 1 ký tự: ";
+                deBai.innerText = "Nhập 1 chuỗi và 1 ký tự, kiểm tra xem kí tự có trong mảng ko, trả về số lần xuất hiện của kí tự"
+                break;
+        }
+    }
+
+    function processExercise(exerciseNumber){
+        let inputOne = document.getElementById("input-1").value;
+        let inputTwo = document.getElementById("input-2").value;
+        let inputThree = document.getElementById("input-3").value;
+        switch (exerciseNumber) {
+            case 1:
+                exercise1(inputOne, inputTwo);
+                break;
+            case 2:
+                exercise2(inputOne);
+                break;
+            case 3:
+                exercise3(inputOne);
+                break;
+            case 4:
+                exercise4(inputOne);
+                break;
+            case 5:
+                exercise5(inputOne);
+                break;
+            case 6:
+                isNumber(inputOne);
+                break;
+            case 7:
+                exercise7(inputOne, inputTwo, inputThree);
+                break;
+            case 8:
+                exercise8(inputOne);
+                break;
+            case 9:
+                exercise9(inputOne);
+                break;
+            case 10:
+                exercise10(inputOne, inputTwo);
+                break;
+        }
+    }
+    // Bài 1: Nhập 2 số, hiển thị tổng nếu num1 <= num2, num1 lớn hơn num2 nếu num1 > num2
+    function exercise1(num1, num2) {
+        num1 = +(num1);
+        num2 = +(num2);
+        displayResult.innerText =  num1 > num2 ? `${num1} lớn hơn ${num2}` : `Tổng ${num1} + ${num2} = ${num1 + num2}`;
+    }
+    // Bài 2: Hiển thị tên chòm sao tương ứng vs tên ngôi sao nhập vào
+    function exercise2 (starName) {        
+        let starsName = ["Polaris", "Aldebaran", "Deneb", "Vega", "Altair", "Dubhe", "Regulus"];
+        let constellationsName = ["Ursa Minor", "Tarurus", "Cygnus", "Lyra", "Aquila", "Ursa Major", "Leo"];
+        for(let i = 0; i < starsName.length; i++) {
+            if(i == starsName.length - 1 && starsName[i] != starName) {
+                displayResult.innerText = "Không tìm thấy ngôi sao bạn vừa nhập!";
+            } else if(starsName[i] === starName) {
+                displayResult.innerText = `Ngôi sao ${starName} thuộc chòm sao ${constellationsName[i]}`;
+                break;
+            }
+        }
+    }
+    // Bài 3: Bình phương của 1 số nhập vào
+    function exercise3(num) {
+        num = +num;
+        if(isNaN(num)) displayResult.innerText = "Vui lòng nhập vào 1 số!";
+        else displayResult.innerText = `Bình phương của ${num} = ${Math.pow(num,2)}`;
+    }
+    //Bài 4: Chu vi và diện tích hình tròn
+    function exercise4(radius) {
+        radius = parseInt(radius);
+        if(isNaN(radius)) displayResult.innerText = "Vui lòng nhập vào 1 số!";
+        else {
+            displayResult.innerText = `Hình tròn có chu vi = ${(2*radius*Math.PI).toFixed(2)} và diện tích = ${(Math.PI*Math.pow(radius,2)).toFixed(2)}`;
+        }
+    }
+    // Bài 5: Giai thừa của 1 số nhập vào
+    function exercise5(num) {
+        num = parseInt(num);
+        if(isNaN(num)) displayResult.innerText = "Vui lòng nhập vào 1 số!";
+        else {
+            let factor = 1;
+            for(let i = 1; i <= num; i++) {
+                factor *= i;
+            }
+            displayResult.innerText = `Giai thừa của ${num}: ${num}! = ${factor}`;            }        
+    }
+    // Bài 6: Kiểm tra kí tự nhập vào là số hay ko
+    function isNumber(inputValue) {
+        inputValue = parseInt(inputValue);
+        displayResult.innerText = isNaN(inputValue) ? 'Không phải là số!' : 'Là số';
+    }
+    // Bài 7: Nhập 3 số, hiển thị số nhỏ nhất
+    function exercise7() {
+        let args = new Array(arguments.length);
+        // Convert arguments sang Array để dùng phương thức reduce()
+        for(let i = 0; i < args.length; i++) args[i] = +arguments[i];
+        console.log(args);
+        console.log(args.every(e => !isNaN(e)&&e!=""));
+        if(args.every(e => !isNaN(e)&&e!="")){
+            displayResult.innerText = "Số nhỏ nhất: " + args.reduce((previous, current) => {
+                console.log(previous);
+                return previous > current ? current : previous;
+            });
+        } else displayResult.innerText = "Vui lòng nhập vào số nguyên!";
+    }
+    // Bài 8: Nhập 1 số, kiểm tra có phải nguyên dương hay ko
+    function exercise8(num){
+        num = +num;
+        if(isNaN(num)) displayResult.innerText = "Vui lòng nhập vào 1 số!";
+        else {
+            displayResult.innerText = num > 0 ? true : false;
+        }
+    }
+    // Bài 9: Nhập vào 1 mảng số nguyên, đảo mảng
+    function exercise9(str) {
+        let arr = str.split(",");
+        let mid = arr.length / 2;
+        for(let i = 0, j = arr.length -1; i < mid, j >= mid; i++, j--){
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        //displayResult.innerText = `Mảng [${arr}] có đảo ngược là [${arr.reverse()}]`;
+        displayResult.innerText = `Đảo ngược: ${arr}`;
+    }
+    // Bài 10: Nhập 1 chuỗi và 1 ký tự, kiểm tra xem kí tự có trong mảng ko, trả về số lần xuất hiện của kí tự
+    function exercise10(str, searchChar) {
+        let arr = str.split("");
+        let result = [];
+        for(let i = 0; i < arr.length; i++) {
+            if(arr[i] == searchChar) result.push(i);
+        }
+        displayResult.innerText = result.length > 0 ? `Số lần xuất hiện của ${searchChar} trong chuỗi "${str}" là ${result.length}` : `Kí tự ${searchChar} không có xuất hiện trong chuỗi ${str}`;
+    }
+</script>
+</html>

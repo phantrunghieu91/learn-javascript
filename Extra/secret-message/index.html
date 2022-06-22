@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Create a progream that replaces each letter in a message with its corresponding letter in a backwards version of the English alphabet.
+
+    function secretMessage(str) {
+        let result = "";
+        result = str.toLowerCase().split("").map((char) => {
+            if(char.trim() != ""){
+                let before = char.charCodeAt(0) - "a".charCodeAt(0);
+                let after = String.fromCharCode("z".charCodeAt(0) - before);
+                return after;
+            } else {
+                return char;
+            }
+        }).join("");
+        return result;
+    }
+
+    console.log(secretMessage("Hello World"));
+</script>
+</html>

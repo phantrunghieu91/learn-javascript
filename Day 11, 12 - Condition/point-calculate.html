@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tính điểm Đại học khối D</h1>
+    <p>
+        <label for="math">Môn Toán</label>
+        <input type="text" id="math" size="10">
+    </p>
+    <p>
+        <label for="literature">Môn Văn</label>
+        <input type="text" id="literature" size="10">
+    </p>
+    <p>
+        <label for="english">Môn Anh</label>
+        <input type="text" id="english" size="10">
+    </p>
+    <p>
+        <label for="zone">Khu vực</label>
+        <select name="zone" id="zone">
+            <option value="KV1">KV1</option>
+            <option value="KV2">KV2</option>
+            <option value="KV2-NT">KV2-NT</option>
+            <option value="KV3">KV3</option>
+        </select>
+    </p>
+    <p><button onclick="calc()">Tính điểm</button></p>
+    <h2 id="result" style="color:red;"></h2>
+</body>
+<script>
+    function calc(){
+        let math = parseFloat(document.getElementById("math").value);
+        let literature = parseFloat(document.getElementById("literature").value);
+        let english = parseFloat(document.getElementById("english").value);
+        let result = document.getElementById("result");
+        let zone = document.getElementById("zone").value;
+        let pointCalculated;
+        console.log(math,zone);
+        // addition point per zone
+        switch (zone) {
+            case "KV1":
+                pointCalculated = math + literature + english + 0.75;
+                break;
+            case "KV2":
+                pointCalculated = math + literature + english + 0.5;
+                break;
+            case "KV2-NT":
+                pointCalculated = math + literature + english + 0.25;
+                break;
+            case "KV3":
+                pointCalculated = math + literature + english;
+                break;
+        }
+        result.innerText = "Tổng điểm ĐH khối D của bạn là: " + pointCalculated;
+    }
+</script>
+</html>

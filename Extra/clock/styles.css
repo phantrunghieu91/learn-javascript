@@ -1,0 +1,120 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --shadow-color: hsl(0, 0%, 23%);
+}
+
+body,
+.clock-outer,
+.clock,
+.time,
+.clock > .time > .time-hours,
+.clock > .time > .time-mins,
+.clock > .time > .time-secs,
+.clock > .time > .time-hours > .first,
+.clock > .time > .time-hours > .second,
+.clock > .time > .time-mins > .first,
+.clock > .time > .time-mins > .second,
+.clock > .time > .time-secs > .first,
+.clock > .time > .time-secs > .second {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 110px;
+    font-weight: 800;
+    width: 100vw;
+    height: 100vh;
+    background-color: lightgrey;
+}
+
+.clock-outer {
+    width: 750px;
+    height: 350px;
+    background-color: lightblue;
+    box-shadow: 20px 20px 20px 0px var(--shadow-color),
+                -20px -20px 20px 0px var(--shadow-color),
+                20px -20px 20px 0px var(--shadow-color),
+                -20px 20px 20px 0px var(--shadow-color);
+    border-radius: 70px;
+}
+
+.clock {
+    width: 700px;
+    height: 300px;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.clock > .time > .time-hours,
+.clock > .time > .time-mins,
+.clock > .time > .time-secs {    
+    height: 81.4px;
+    /* padding: 0 10px; */
+    overflow: hidden;
+    line-height: 81.4px;
+    width: 200px;
+}
+
+.clock > .time > .time-hours {
+    justify-content: flex-start;
+    width: 120px;
+}
+
+.clock > .time > .time-mins::before,
+.clock > .time > .time-secs::before {
+    content: ":";
+    text-align: center;    
+    margin-top: -16px;
+    width: 32px;
+}
+
+.clock > .time > .time-secs,
+.clock > .time > .time-secs::before {
+    color: lightslategrey;
+}
+
+.clock > .time > .time-hours > .first,
+.clock > .time > .time-hours > .second,
+.clock > .time > .time-mins > .first,
+.clock > .time > .time-mins > .second,
+.clock > .time > .time-secs > .first,
+.clock > .time > .time-secs > .second {  
+    align-self: flex-start;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    padding: 0 5px;
+    line-height: 81.4px;
+    height: 81.4px;
+}
+
+.clock > .time > .time-hours > .first > .number,
+.clock > .time > .time-hours > .second > .number,
+.clock > .time > .time-mins > .first > .number,
+.clock > .time > .time-mins > .second > .number,
+.clock > .time > .time-secs > .first > .number,
+.clock > .time > .time-secs > .second > .number {    
+    display: table;
+    line-height: 81.4px;
+}
+
+.move {
+    animation: moveup 1s infinite;
+}
+
+@keyframes moveup {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}

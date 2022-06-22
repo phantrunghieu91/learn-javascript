@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <input type="text" id="number-1">
+        <input type="text" id="number-2">
+        <button onclick="sumOfRange()">Tính tổng</button>
+    </p>
+    <p id="result"></p>
+</body>
+<script>
+    function sumOfRange(){
+        let number1 = +document.getElementById("number-1").value;
+        let number2 = +document.getElementById("number-2").value;
+        let result = document.getElementById("result");
+        let isNumber1GreaterThanNumber2 = number1 > number2;
+        let isNumber1LessThanNumber2 = number1 < number2;
+        let sum = 0;
+        if(isNumber1GreaterThanNumber2) {
+            for(let i = number2; i <= number1; i++) {
+                sum += i;
+                result.innerText = `Tổng các số trong khoảng ${number2} đến ${number1} = ${sum}`;
+            }
+        } else if(isNumber1LessThanNumber2){
+            for(let i = number1; i <= number2; i++) {
+                sum += i;
+                result.innerText = `Tổng các số trong khoảng ${number1} đến ${number2} = ${sum}`;
+            }
+        } else {
+            sum = number1;
+            result.innerText = `Tổng các số trong khoảng ${number1} đến ${number2} = ${sum}`;
+        }
+    }
+</script>
+</html>

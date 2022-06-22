@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Nhập số:</p>
+    <p><input type="text" id="num"><button onclick="evenTest()">Kiểm tra</button></p>
+</body>
+<script>
+    function evenTest(){     
+        let testStr = /\D/g;
+        console.log(testStr.test(document.getElementById("num").value));
+        if(testStr.test(document.getElementById("num").value)){
+            alert(`Hãy nhập vào 1 số!`);
+            document.getElementById("num").value = "";
+            return
+        }
+        if(document.getElementById("num").value==""){
+            alert(`Hãy nhập vào 1 số!`);
+            return
+        }
+        if(!testStr.test(document.getElementById("num").value)){
+            let num = +document.getElementById("num").value;
+            num % 2 == 0 ? alert(`${num} là số chẵn`) : alert(`${num} là số lẻ`);
+            return
+        }
+    }
+</script>
+</html>

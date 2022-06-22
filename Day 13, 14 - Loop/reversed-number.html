@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inputNum">
+    <button onclick="reverseNumber()">Đảo số</button>
+    <div id="display-result"/>
+</body>
+<script>
+    let cachMot = document.createElement("p");
+    let cachHai = document.createElement("p");
+    let cachBa = document.createElement("P");
+    function reverseNumber(){
+        let display = document.getElementById("display-result");
+        let number = document.getElementById("inputNum").value;
+        let loopTime = number.length;
+        let result = 0;
+        let i = 0;
+        let cachMotNumber = +number;
+
+        // Cách 1 - Gợi ý
+        while(i < loopTime) {
+            result = Math.floor(result * 10 + cachMotNumber % 10);
+            cachMotNumber = Math.floor(cachMotNumber / 10);
+            i++;
+        }
+        cachMot.innerText = result;
+        display.appendChild(cachMot);
+
+        //Cách 2 - Dùng hàm có sẵn reverse() mảng
+        cachHai.innerText = number.split("").reverse().join("");
+        display.appendChild(cachHai);
+
+        // cách 3 dùng vòng lặp
+        let cachBaNumber = number.split("");
+        for(let i = 0; i < (cachBaNumber.length / 2); i ++) {
+            let temp = cachBaNumber[cachBaNumber.length - 1 - i];
+            cachBaNumber[cachBaNumber.length -1 - i] = cachBaNumber[i];
+            cachBaNumber[i] = temp;
+        }
+        cachBa.innerText = cachBaNumber.join("");
+        display.appendChild(cachBa);
+    }
+</script>
+</html>

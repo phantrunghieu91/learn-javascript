@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Take the encoded message, flip it around, remove any characters that are not a letter or a space, and output the hidden message.
+    const sample = "d89%l++5r19o8W *o=l645le9H";
+    function unencode(str) {
+        let regex = /[A-Za-z]*\s*/g;
+        return str.match(regex).filter(e => {
+            if(e != ""){
+                return e;
+            }
+        }).map(e => {
+            if(e.length >= 2){
+                    let reversed = e.split("").reverse().join("");
+                    return reversed;
+                } else {
+                    return e;
+                }
+        }).reverse().join("");
+    }
+    console.log(unencode(sample));
+</script>
+</html>

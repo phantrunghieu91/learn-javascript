@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi giữa feet và meter</title>
+</head>
+<body>
+    <label for="inputValue">Nhập: <input type="number" id="inputValue"></label>
+    <select id="feetOrMeter">
+        <option value="feet">Feet to Meter</option>
+        <option value="meter">Meter to Feet</option>
+    </select>
+    <button onclick="processChoice(document.getElementById('feetOrMeter').value)">Convert</button>
+    <h3 id="result-display"></h3>
+</body>
+<script>
+    function feetToMeter(feet){
+        return (0.305 * feet).toFixed(3);
+    }
+
+    function meterToFeet(meter){
+        return (3.279 * meter).toFixed(3);
+    }
+
+    function processChoice(choice){
+        let result = document.getElementById("result-display");
+        switch (choice){
+            case "feet":
+                result.innerText = "Meter: " + feetToMeter(document.getElementById("inputValue").value);
+                break;
+            case "meter":
+                result.innerText = "Feet: " + meterToFeet(document.getElementById("inputValue").value);
+                break;
+        }
+    }
+</script>
+</html>

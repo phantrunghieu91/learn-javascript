@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Tạo content div
+    let content = document.createElement("h1");
+    document.body.appendChild(content);
+
+    // Nhận input num
+    let num = prompt("Nhập n = ");
+    content.innerText = `Dãy ${num} số Fibonacci gồm: `;
+    let n1, n2, fn;
+    // Loop fibonacci
+    for(let i = 1; i <= num; i++) {
+        if (i == 1) {
+            n1 = 1;
+            content.innerText += n1 + ", ";
+        }else if (i == 2) {
+            n2 = 1;
+            content.innerText += n2 + ", ";
+        } else {
+            fn = n1 + n2;
+            n1 = n2;
+            n2 = fn;
+            if(!(i == num)) content.innerText += fn + ", ";
+            else content.innerText += fn;
+        }
+        console.log(fn);
+        if(num < 1) {
+            break;
+        }
+    }
+
+</script>
+</html>
