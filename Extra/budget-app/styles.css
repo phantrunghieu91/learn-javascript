@@ -148,12 +148,21 @@ body {
     justify-content: flex-start;
 }
 
-.main-container > .display-container > .money-display div {
+.main-container > .display-container > .money-display :is(.budget-display, .balance-display, .expenses-display) {
     width: calc(100% / 3);
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     text-transform: uppercase;
+    padding: 1rem;
+}
+
+.main-container > .display-container > .money-display :is(.budget-display, .balance-display) {
+    color: var(--dark-green);
+}
+
+.main-container > .display-container > .money-display > .expenses-display {
+    color: var(--violet);
 }
 
 .main-container > .display-container > .expense-detail {
@@ -163,7 +172,11 @@ body {
 
 .main-container > .display-container > .expense-detail table {
     width: 100%;
-    text-align: center;
+}
+
+.main-container > .display-container > .expense-detail table td:nth-child(2n + 1),
+.main-container > .display-container > .expense-detail table td:nth-child(2n + 2) {
+    width: 40%;
 }
 
 .main-container > .display-container > .expense-detail table td a {
@@ -177,6 +190,35 @@ body {
 
 .main-container > .display-container > .expense-detail table td a:last-child {
     color: var(--violet);
+}
+
+.main-container > .display-container > .expense-detail table td :is(input, span) {
+    display: inline-block;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    width: 80%;
+    text-align: center;
+}
+
+.text-display {
+    margin-top: 2rem;
+    width: 100%;
+    font-size: 4rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.yes-no-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (max-width: 800px) {
