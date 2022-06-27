@@ -80,7 +80,7 @@
             let second = now.getSeconds();
             hour = hour % 12;
 
-            hour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));
+            hour = (hour*Math.PI/6) + (minute*Math.PI/(6*60)) + (second*Math.PI/(360*60));
             this.drawHand(hour, this.faceSize * .5, this.faceSize * .06, '#333');
 
             minute = (minute * Math.PI / 30) + (second * Math.PI / (30* 60));
