@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #canvas {
+        background-color: black;
+    }
+</style>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script>
+    const CLOCK_SIZE = 500;
+    const canvas = document.getElementById('canvas');
+    canvas.width = CLOCK_SIZE;
+    canvas.height = CLOCK_SIZE;
+
+    class AnalogClock {
+        constructor() {
+            this.ctx = canvas.getContext('2d');
+            this.borderSize = Math.floor((CLOCK_SIZE / 2) * .85);
+            this.faceSize = Math.floor((CLOCK_SIZE / 2) * .8)
+        }
+
+        drawClockFace = () => {
+            this.ctx.beginPath();
+            this.ctx.arc(0, 0,this.faceSize, 0, 2 * Math.PI);
+            this.ctx.fillStyle = 'white';
+            this.ctx.fill();
+
+            this.ctx.strokeStyle = 'lightgray';
+            this.ctx.lineWidth = this.borderSize - this.faceSize;
+            this.ctx.arc(0, 0, this.borderSize, 0, 2 * Math.PI);
+            this.ctx.stroke();
+
+            this.ctx.beginPath();
+            this.ctx.arc(0, 0, 10, 0, 2 * Math.PI);
+            this.ctx.fillStyle = '#333';
+            this.ctx.fill();
+        };
+
+        drawNumbers = () => {
+            this.ctx.font = this.faceSize * .15 + 'px arial';
+            this.ctx.textBaseline = 'middle';
+            this.ctx.textAlign = 'center';
+
+            for(let number = 1; number <= 12; number++) {
+                let angle = number * Math.PI / 6;
+                this.ctx.rotate(angle);
+                this.ctx.translate(0, -this.faceSize * .8);
+                this.ctx.rotate(-angle);
+                this.ctx.fillText(number.toString(), 0, 0);
+                this.ctx.rotate(angle);
+                this.ctx.translate(0, this.faceSize * .8);
+                this.ctx.rotate(-angle);
+            }
+        };
+
+        drawHands = () => {
+            const now = new Date();
+            let hour = now.getHours();
+            let minute = now.getMinutes();
+            let second = now.getSeconds();
+            hour = hour % 12;
+
+            hour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));
+            this.drawHand(hour, this.faceSize * .5, this.faceSize * .06, '#333');
+
+            minute = (minute * Math.PI / 30) + (second * Math.PI / (30* 60));
+            this.drawHand(minute, this.faceSize * .6, this.faceSize * .04, 'black');
+
+            second = (second * Math.PI / 30);
+            this.drawHand(second, this.faceSize * 0.7 , this.faceSize * 0.02, 'red');
+        };
+
+        drawHand = (pos, length, width, color) => {
+            this.ctx.beginPath();
+            this.ctx.lineWidth = width;
+            this.ctx.lineCap = 'round';
+            this.ctx.strokeStyle = color;
+            this.ctx.moveTo(0, 0);
+            this.ctx.rotate(pos);
+            this.ctx.lineTo(0, -length);
+            this.ctx.stroke();
+            this.ctx.rotate(-pos);
+        };
+
+        draw = () => {
+            this.drawClockFace();
+            this.drawNumbers();
+            this.drawHands();
+        };
+    };
+
+    const clock = new AnalogClock();
+    clock.ctx.translate(CLOCK_SIZE / 2, CLOCK_SIZE / 2);
+    clock.draw();
+    const interval = setInterval(clock.draw, 1000);
+</script>
+</html>
