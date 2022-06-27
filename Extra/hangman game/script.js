@@ -103,9 +103,15 @@ function renderAlphabetButtons() {
         let charBtn = document.createElement("button");
         charBtn.classList.add("char-button");
         charBtn.textContent = char;
-        charBtn.addEventListener("click", handleAlphabetClick, {once: true});
         document.getElementById("alphabet-btn-container").appendChild(charBtn);
     }
+}
+
+function addFunctionForAlphabetBtns() {
+    const abcBtns = document.querySelectorAll('button.char-button');
+    abcBtns.forEach(btn => {
+        btn.addEventListener("click", handleAlphabetClick, {once: true});
+    });
 }
 
 const handleAlphabetClick = (event) => {
@@ -162,6 +168,7 @@ function handleCategoriesSelectClick(event) {
     self.parentNode.parentNode.textContent = `Chosen category is ${self.textContent}`;
     renderWord(self.textContent.toLowerCase());
     guessChars = document.querySelectorAll('.guess');
+    addFunctionForAlphabetBtns();
 }
 
 function randomValue(arr, category) {
